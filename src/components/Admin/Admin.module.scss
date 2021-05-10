@@ -1,0 +1,26 @@
+.admin{
+
+  .header{
+    color: red;
+  }
+
+  form{
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+    text-align: left;
+
+    label{
+      font-weight: bold;
+      width: 15%;
+
+      input{
+        padding: 4px 8px;
+        border: 1px solid black;
+        border-radius: 0px;
+        text-transform: capitalize;
+
+margin: 2% 1%;      }
+    }
+  }
+}
