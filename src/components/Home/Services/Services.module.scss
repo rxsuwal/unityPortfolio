@@ -1,0 +1,116 @@
+@import '../../../assets/styles/variables.scss';
+
+.services{
+    display: flex;
+    width: 80%;
+    margin: auto;
+
+    >div{
+        width: 50%;
+        margin: auto;
+    }
+
+}
+
+.txt{
+    text-align: left;
+
+    h3{
+        font-size: 24px;
+    }
+
+    .txtSlide{
+        h1{
+            font-size: 78px;
+            margin-top: 0;
+        }
+
+        p{
+            font-size: 22px;
+            font-weight: 600;
+         
+        }
+        
+    }
+
+   
+
+}
+
+.img{
+    background-color: $bgBlue;
+    height: 500px;
+    margin-right: -10%!important;
+    margin-top: -10%!important;
+    z-index: 999;
+
+    .imgSlider{
+        margin-top: -20%;
+        position: relative;
+  
+
+    }
+
+}
+@media screen and (max-width:1600px) {
+    .txt{
+        .txtSlide{
+            h1{
+                font-size: 60px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:1366px) {
+
+    .txt{
+        h3{
+            font-size: 20px;
+        }
+        .txtSlide{
+            h1{
+                font-size: 40px;
+            }
+            p{
+                font-size: 18px;
+            }
+        }
+    }
+
+    .img{
+        height: 350px;
+    }
+    
+}
+
+@media screen and (max-width:768px) {
+
+    .txt{
+        width: 100%!important;
+    }
+
+    .img{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width:600px) {
+
+    .txt{
+        .txtSlide{
+            h1{
+                font-size: 26px;
+            }
+            p{
+                font-size: 16px;
+            }
+        }
+    }
+    
+}
+
+
+

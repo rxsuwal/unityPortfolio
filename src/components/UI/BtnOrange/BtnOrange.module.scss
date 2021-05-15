@@ -9,6 +9,13 @@ button{
     border-radius: 25px;
     font-weight: 400;
     font-family: Poppins;
+    transition: all 0.3s ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $bgBlack;
+
+    }
 }
 @media screen and (max-width:1600px) {
    button{

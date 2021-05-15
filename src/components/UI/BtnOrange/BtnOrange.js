@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './BtnOrange.module.scss'
+import './BtnOrange.module.scss'
 
 const BtnOrange = (props) => {
     return (

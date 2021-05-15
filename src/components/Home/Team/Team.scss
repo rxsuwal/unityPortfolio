@@ -1,0 +1,202 @@
+@import '../../../assets//styles/variables.scss';
+
+.team{
+    background-image: linear-gradient(to left, rgba(44, 61, 167, 0.9), rgba(44, 61, 167, 0.9)), url(../../../assets/img/about-img.jpg);
+    background-size: cover;
+    background-position: fixed;
+    position: relative;
+    color: $txtWhite;
+}
+
+.slider{
+    width: 80%;
+    margin: auto;
+    padding: 200px 0;
+    text-align: left;
+    position: relative;
+
+    .slide{
+        max-width: 70%;
+        h1{
+            font-size: 70px;
+
+        }
+
+        p{
+            font-size: 22px;
+            font-weight: 500;
+        }
+    }
+   
+}
+
+.slick-dots{
+    bottom: 50%!important;
+    transform: translate(0, 50%);
+    right: 0;
+    text-align: center;
+    width: fit-content!important;
+    display: flex!important;
+    flex-direction: column;
+    align-items: center;
+
+    li{
+        width: fit-content!important;
+        height: auto!important;
+        a{
+            font-size: 30px;
+            font-weight: 600;
+            opacity: 0.5;
+            transition: all 0.3s ease-in-out;
+        }
+
+    }
+
+    
+
+    li.slick-active{
+
+        a{
+            font-size: 50px;
+            font-weight: 600;
+            opacity: 1;
+        }
+
+    }
+
+    
+}
+
+
+button.slick-arrow{
+    left: 95%;
+    color: $txtWhite;
+}
+
+button.slick-prev{
+    top: 15%;
+    &::before{
+        content: '';
+
+    }
+
+}
+button.slick-next{
+    top:  85%;
+    &::before{
+        content: '';
+
+    }
+}
+
+
+@media screen and (max-width:1600px) {
+
+    .slider{
+        padding: 100px 0;
+
+        .slide{
+            h1{
+                font-size: 50px;
+            }
+            p{
+                font-size: 18px;
+            }
+        }
+    }
+
+    .slick-dots{
+
+        li{
+            a{
+                font-size: 20px;
+            }
+
+        }
+        li.slick-active{
+
+            a{
+                font-size: 30px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:1024px) {
+
+    button.slick-next{
+        top: 80%;
+    }
+    
+}
+
+
+@media screen and (max-width:768px) {
+
+ .slider{
+     .slide{
+         h1{
+             font-size: 40px;
+         }
+         p{
+             font-size: 16px;
+         }
+
+
+     }
+ }   
+    
+}
+
+@media screen and (max-width:600px) {
+
+    .slider{
+        .slide{
+            h1{
+                font-size: 30px;
+            }
+        }
+    }
+
+    .slick-dots{
+        li{
+            a{
+                font-size: 16px;
+            }
+        }
+        li.slick-active{
+            a{
+                font-size: 26px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .slider{
+        padding: 50px 0;
+        .slide{
+            max-width: 90%;
+            h1{
+                font-size: 20px;
+            }
+
+            p{
+                font-size: 14px;
+            }
+        }
+    }
+
+    button.slick-arrow{
+        display: none!important;
+    }
+    
+}
+
+
+
+
+
+
