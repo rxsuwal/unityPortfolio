@@ -1,0 +1,309 @@
+@import '../../../assets/styles/variables.scss';
+
+
+.Hero{
+  
+  position: relative;
+  height: 100vh;
+  background-image: url('../../../assets/img/banner.png');
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-position: fixed;
+
+  header{
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+ .logo{
+      width: 150px;
+      height: auto;
+      margin: auto;
+
+    }
+   
+
+    .socialLinks{
+      ul{
+        list-style: none;
+        margin: 40px auto;
+        padding: 0;
+
+        li{
+          display: inline;
+          padding: 4px 8px;
+           img{
+            width: auto;
+            height: auto;
+           }
+        }
+      }
+      
+    }
+
+  }
+
+  .menu{
+      position: absolute;
+      right: 26px;
+      top: 10%;
+    .ham{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      &:hover{
+        cursor: pointer;
+      }
+
+      >div{
+        width: 100px;
+        height: 4px;
+        background-color: $bgBlack; 
+        transition: all 0.3s ease-in-out;
+      }
+
+     
+      div:nth-child(2){
+        margin: 10px 0;
+        width: 75%; 
+      }
+
+    
+
+      div:nth-child(3){
+        width: 50%;
+      
+      }
+
+     
+
+      &:hover div{
+        width: 100px;
+        cursor: pointer;
+      }
+    }
+  }
+
+ 
+
+  .banner{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60%;
+    transform: translateY(-50%);
+
+    h1{
+      font-size: 100px;
+    }
+
+
+    
+    .watchIntro{
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin-bottom: 10px;
+
+
+      .play{
+        width: 50px;
+        height: auto;
+        margin-right: 16px;
+      }
+
+
+    }
+
+    
+  }
+
+}
+
+@media screen and (max-width:1600px) {
+  .Hero{
+      
+
+      .banner{
+
+        h1{
+          font-size: 70px;
+        }
+
+        .watchIntro{
+          font-size: 20px;
+  
+          .play{
+            width: 40px;
+          }
+        }
+
+      }
+  }
+  }
+
+
+@media screen and  (max-width:1366px){
+  .Hero{
+   
+
+    header{
+      .logo{
+        width: 120px;
+      }
+
+      .socialLinks{
+       
+        ul{
+          margin: 20px auto;
+        }
+      }
+    }
+
+    .menu{
+      right: 36px;
+
+      .ham{
+        >div{
+          width: 50px;
+         
+        }
+        
+
+        div:nth-child(2){
+          margin: 5px 0;
+          
+        }
+        &:hover div{
+          width: 50px;
+        }
+      }
+    }
+
+    .banner {
+      h1{
+        font-size: 50px;
+      }
+
+      .watchIntro{
+        font-size: 16px;
+      }
+    }
+  }
+
+  }  
+
+@media screen and  (max-width:1200px){
+    .Hero{
+      
+
+      header{
+        .logo{
+          width: 100px;
+        }
+
+       
+      }
+
+     
+    }
+
+  } 
+
+
+@media screen and  (max-width:1024px) and (orientation:portrait){
+
+  .Hero {
+    header{
+      .logo{
+        width: 175px;
+      }
+    }
+
+    .banner{
+      top:50%;
+      h1{
+        font-size: 80px;
+      }
+
+      .watchIntro{
+        font-size: 24px;
+      }
+    }
+  }
+
+}
+
+@media screen and  (max-width:998px){
+
+}
+
+@media screen and  (max-width:768px){
+
+  .Hero{
+    .banner{
+      h1{
+        font-size: 60px;
+      }
+    }
+  }
+
+}
+
+@media screen and  (max-width:600px){
+  .Hero{
+
+    header{
+      .logo{
+        width: 100px;
+      }
+    }
+
+    .banner{
+      h1{
+        font-size: 40px;
+      }
+      .watchIntro{
+        font-size: 18px;
+      }
+    }
+  }
+
+}
+
+@media screen and  (max-width:450px){
+
+  .Hero{
+    header{
+      .logo{
+        margin-left: 5%;
+      }
+    }
+  }
+
+}
+
+@media screen and  (max-width:350px){
+
+  .Hero{
+
+    .menu{
+      right: 26px;
+    }
+
+    .banner{
+      top: 55%;
+
+      h1{
+        font-size: 26px;
+      }
+
+      .watchIntro{
+        font-size: 16px;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,22 @@
+.vl{
+    border-left: 2px solid #000000;
+    margin:  auto;
+    width: fit-content;
+    height: 80px;
+}
+
+@media screen and (max-width:1600px) {
+
+    .vl{
+        height: 70px;
+    }
+    
+}
+
+@media screen and (max-width:1366px) {
+
+    .vl{
+        height: 60px;
+    }
+    
+}

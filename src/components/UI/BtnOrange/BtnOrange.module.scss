@@ -1,0 +1,44 @@
+@import '../../../assets//styles/variables.scss';
+
+button{
+    border:$orange ;
+    background-color: $bgOrange;
+    color: $txtWhite;
+    padding: 6px 44px;
+    font-size: 26px;
+    border-radius: 25px;
+    font-weight: 400;
+    font-family: Poppins;
+}
+@media screen and (max-width:1600px) {
+   button{
+       font-size: 18px;
+   }
+   }
+@media screen and  (max-width:1400px){
+    button{
+        font-size: 16px;
+    }
+}
+
+
+@media screen and  (max-width:1024px){
+    button{
+       font-size: 18px;
+        margin-top: 16px;
+    }
+}
+
+@media screen and  (max-width:600px){
+    button{
+       font-size: 14px;
+       
+    }
+}
+
+@media screen and  (max-width:350px){
+    button{
+       font-size: 12px;
+       
+    }
+}

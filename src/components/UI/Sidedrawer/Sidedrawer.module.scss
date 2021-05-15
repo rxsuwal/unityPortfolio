@@ -1,0 +1,21 @@
+@import '../../../assets//styles/variables.scss';
+
+.sideDrawer{
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color:$bgOrange ;
+    width: 75%;
+    height: 100%;
+    transition: all 0.3s ease-in-out ;
+    z-index: 1000;
+
+}
+
+.open{
+    transform: translateX(0);
+}
+
+.close{
+    transform: translateX(100%);
+}

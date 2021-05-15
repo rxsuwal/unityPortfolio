@@ -1,17 +1,31 @@
 
 import './App.css';
-import Admin from './components/Admin/Admin';
-import Dashboard from './components/Dashboard/Dashboard';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import Admin from './pages/Admin/Admin'
+import Home from './pages/Home/Home'
+
 
 
 function App() {
   return (
     <div className="App">
-      
-
-     <Admin/>
-
-     <Dashboard/>
+    
+      <Router>
+      <Switch>
+          <Route path="/admin">
+           <Admin/>
+          </Route>
+          <Route path="/">
+            <Home/>
+          </Route>
+         
+        </Switch>
+    </Router>
       
     </div>
   );
