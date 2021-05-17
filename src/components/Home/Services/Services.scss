@@ -1,0 +1,189 @@
+@import '../../../assets/styles/variables.scss';
+
+.services{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    padding: 100px 0;
+
+    >div{
+        width: 50%;
+        margin: auto;
+    }
+
+}
+
+.servicesTxt{
+    text-align: left;
+
+    h3{
+        font-size: 24px;
+    }
+
+    .txtSlide{
+        h1{
+            font-size: 78px;
+            margin-top: 0;
+        }
+
+        p{
+            font-size: 22px;
+            font-weight: 600;
+         
+        }
+        
+    }
+
+    ul.slick-dots{
+        text-align: left;
+
+        li{
+            border-radius: 25px;
+            padding: 8px;
+            border: 1px solid;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            a{
+                font-size: 16px;
+            }
+        }
+        li.slick-active{
+            background-color: $bgOrange;
+            border-color: $bgOrange;
+            a{
+                color: $txtWhite;
+            }
+        }
+    }
+
+   
+
+}
+
+.servicesImg{
+    background-color: $bgBlue;
+    height: 500px;
+    margin-right: -10%!important;
+    margin-top: -10%!important;
+    z-index: 999;
+
+    .imgSlider{
+        margin-top: -20%;
+        position: relative;
+  
+
+    }
+
+    button.slick-arrow{   
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+        font-size: 20px;
+        padding: 16px 8px;
+        width: fit-content;
+        height: fit-content;
+        top: 75%;
+        &::before{
+            content: '';
+        }
+    }
+
+    button.slick-next{
+        background-color: $bgWhite;
+        color: $txtBlack;
+    }
+
+    button.slick-prev{
+        background-color: $bgBlue;
+        color: $txtWhite;
+        left: -40px;
+    }
+
+}
+
+@media screen and (max-width:1600px) {
+    .txt{
+        .txtSlide{
+            h1{
+                font-size: 60px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:1366px) {
+
+    .servicesTxt{
+        h3{
+            font-size: 20px;
+        }
+        .txtSlide{
+            h1{
+                font-size: 40px;
+            }
+            p{
+                font-size: 18px;
+            }
+        }
+    }
+
+    .servicesImg{
+        height: 350px;
+    }
+    
+}
+
+@media screen and (max-width:1024px) {
+    .servicesImg{
+        button.slick-next{
+            top: 75%;
+        }
+    }
+    
+}
+
+@media screen and (max-width:768px) {
+
+    .servicesTxt{
+        width: 100%!important;
+    }
+
+    .servicesImg{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width:600px) {
+
+    .ServicesTxt{
+        .txtSlide{
+            h1{
+                font-size: 26px;
+            }
+            p{
+                font-size: 16px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .servicesTxt{
+        .txtSlide{
+            h1{
+                font-size: 26px;
+            }
+            p{
+                font-size: 16px;
+                text-align: justify;
+            }
+        }
+    }
+    
+}
+
+
+
