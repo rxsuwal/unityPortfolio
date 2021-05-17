@@ -1,9 +1,9 @@
 import React from 'react'
-import './BtnOrange.module.scss'
+import styles from './BtnOrange.module.scss'
 
 const BtnOrange = (props) => {
     return (
-        <button>
+        <button className={styles.btnOrange}>
             {props.children}
         </button>
     )

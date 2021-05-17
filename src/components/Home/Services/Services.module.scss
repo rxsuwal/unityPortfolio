@@ -1,0 +1,38 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/@mixin.scss';
+
+.services{
+
+    @include header;
+
+
+    .servicesList{
+        margin: 50px auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+  
+
+}
+
+
+@media screen and (max-width:1024px) {
+
+    .services{
+        .header{
+            max-width: 60%;
+        }
+    }
+    
+}
+
+@media screen and (max-width:768px) {
+
+    .services{
+        .header{
+            max-width: 80%;
+        }
+    }
+    
+}
+

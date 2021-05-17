@@ -1,112 +1,41 @@
-import React, { Component } from 'react'
-import './Services.scss'
+import React from 'react'
+import ServicesCard from '../../UI/ServicesCard/ServicesCard'
 
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
+import Vl from '../../UI/Vl/Vl'
 
-import imgSlide from '../../../assets/img/mac.png'
-import { render } from '@testing-library/react'
+import styles from './Services.module.scss'
 
-class Services extends  Component {
+import icon_1 from '../../../assets/img/feature_icon_1.png'
+import icon_2 from '../../../assets/img/feature_icon_2.png'
+import icon_3 from '../../../assets/img/feature_icon_3.png'
+import icon_4 from '../../../assets/img/feature_icon_4.png'
+import icon_5 from '../../../assets/img/feature_icon_5.png'
+import icon_6 from '../../../assets/img/feature_icon_6.png'
 
-    constructor(props){
-        super(props);
-        this.state = {
-          nav1: null,
-          nav2: null
-        };
-      }
-    
-      componentDidMount(){
-        this.setState({
-          nav1: this.slider1,
-          nav2: this.slider2
-        });
-      }
-   
-
-    
- 
-   render(){
-
-    const txtSliderSettings ={
-        arrows: false,
-        dots: true,
-        customPaging: function(i) {
-            i++
-            return (
-               
-              <a>
-                {i}
-              </a>
-            );
-          },
-       
-   
-    }
-
-    const imgSliderSettings = {
-        dots:false,
-        arrows:true,
-        nextArrow:<button><i class="fi-xtlrxl-arrow-simple-thin"></i></button>,
-        prevArrow:<button><i class="fi-xtllxl-arrow-simple-thin"></i></button>,
-
-        
-    }
-
-
+const Services = () => {
     return (
-        <div className='services'>
-            <div className='servicesTxt'>
-                <h3>services</h3>
+        <div className={styles.services}>
 
-                <Slider {...txtSliderSettings} 
-                        className='txtSlider'
-                        asNavFor={this.state.nav2}
-                        ref={slider => (this.slider1 = slider)}>
-
-                    <div className="txtSlide">
-                        <h1>We brings a wonderful artistic sense to project</h1>
-                        <p>Nostrud consectetur commodo nostrud deserunt sint ad qui fugiat et commodo aliquip aute do elit. Irure dolor quis non veniam eiusmod veniam ex ea do. Magna in duis non deserunt aliqua et elit consectetur laboris.</p>
-                    </div>
-
-                    <div className="txtSlide">
-                        <h1>We brings a wonderful artistic sense to project</h1>
-                        <p>Nostrud consectetur commodo nostrud deserunt sint ad qui fugiat et commodo aliquip aute do elit. Irure dolor quis non veniam eiusmod veniam ex ea do. Magna in duis non deserunt aliqua et elit consectetur laboris.</p>
-                    </div>
-
-
-                </Slider>
+            <div className={styles.header}>
+                <h1>Your money is yours, we don't  take a cut.</h1>
+                <p>Veniam qui excepteur dolore laboris anim reprehenderit ut culpa consectetur nulla irure minim. Pariatur mollit proident magna cupidatat et do cillum nostrud. Veniam tempor ullamco amet do sit non ipsum occaecat est pariatur dolore Lorem. Elit minim elit irure labore adipisicing voluptate ipsum commodo.</p>
 
             </div>
+            <Vl/>
 
-            <div className='servicesImg'>
-
-                <Slider {...imgSliderSettings} 
-                        className="imgSlider"    
-                        asNavFor={this.state.nav1}
-                        ref={slider => (this.slider2 = slider)}>
-                    <div className="imgSlide">
-
-                        <img src={imgSlide} alt=""/>
-                        
-
-                    </div>
-
-                    <div className="imgSlide">
-
-<img src={imgSlide} alt=""/>
-
-
-</div>
-                </Slider>
-
-            </div>
             
+            <div className={styles.servicesList}>
+                <ServicesCard img={icon_1} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+                <ServicesCard img={icon_2} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+                <ServicesCard img={icon_3} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+                <ServicesCard img={icon_4} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+                <ServicesCard img={icon_5} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+                <ServicesCard img={icon_6} title='Design' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, natus!'/>
+
+
+            </div>
         </div>
     )
-   }
 }
 
 export default Services

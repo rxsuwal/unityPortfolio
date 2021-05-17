@@ -1,0 +1,131 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/@mixin.scss';
+
+
+
+.works{
+    width: 50%;
+    margin: auto;
+    padding: 100px 0;
+    text-align: center;
+    h1{
+        @include title;
+    }
+
+    P{
+        @include subTitle;
+    }
+
+
+
+   
+}
+
+.filter{
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    li{
+        margin: auto 20px;
+
+        button{
+            background: transparent;
+            border: none;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 0.5;
+            font-size: 18px;
+        }
+
+        button.active{
+            opacity: 1;
+            border-bottom: 2px solid #ff5617;
+        }
+    }
+}
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    .gridItem{
+        width: calc(90% / 2);
+        position: relative;
+        margin: auto;
+
+
+        .gridHover{
+            background: #ff5617;
+             color: #ffffff;
+             text-align: left;
+            padding: 12px;
+            position: absolute;
+            left: -50px;
+            right: 14px;
+           bottom: -50px;
+            visibility: hidden;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+
+        }
+
+
+        &:hover .gridHover{
+           
+            bottom: 16px;
+            left: 14px;
+            visibility: visible;
+            
+            
+
+        }
+    }
+
+    div:nth-child(even){
+        margin-top: 75px;
+
+    }
+}
+
+@media screen and (max-width:1400px) {
+    .filter{
+       li{
+        button{
+            font-size: 14px;
+        }
+       }
+    }
+    
+}
+
+@media screen and (max-width:768px) {
+
+    .works{
+        width: 70%;
+    }
+
+    .filter{
+        li{
+            margin: auto;
+        }
+    }
+    
+}
+
+
+@media screen and (max-width:450px) {
+    .works{
+        width: 90%;
+    }
+    
+}
+
+
+

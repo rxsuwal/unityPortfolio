@@ -16,7 +16,6 @@ import Vl from '../../UI/Vl/Vl'
 import BtnOrange from '../../UI/BtnOrange/BtnOrange'
 import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
-
  class Home extends Component {
 
 
@@ -39,8 +38,12 @@ import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
     this.setState({showSideDrawer:true})
   }
 
+  
+
 
   render() {
+
+    
     return (
       <div className={styles.Hero}>
         <header>

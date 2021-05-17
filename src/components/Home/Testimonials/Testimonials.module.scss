@@ -1,0 +1,14 @@
+@import '../../../assets//styles/variables.scss';
+@import '../../../assets/styles/@mixin.scss';
+
+.testimonials{
+
+    @include header;
+
+}
+
+.slider{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}

@@ -1,0 +1,105 @@
+@import '../../../assets//styles/variables.scss';
+
+.servicesCard{
+    width: calc(100%/3);
+    text-align: center;
+    padding: 100px 80px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $bgBlue;
+        color: $txtWhite;
+    }
+
+    .icon{
+        width: 50px;
+            height: auto;
+            margin: auto;
+    }
+
+    h1.title{
+        font-size: 60px;
+        font-weight: 600;
+    }
+
+    p.description{
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+
+}
+
+@media screen and (max-width:1600px) {
+    .servicesCard{
+        h1.title{
+            font-size: 40px;
+        }
+
+        p.description{
+            font-size: 18px;
+        }
+    }
+
+    
+    
+}
+
+@media screen and (max-width:1400px) {
+    .servicesCard{
+        padding: 40px 60px;
+
+        h1.title{
+            font-size: 28px;
+        }
+
+        p.description{
+            font-size: 16px;
+        }
+    }
+
+    
+    
+}
+
+@media screen and (max-width:1024px) {
+    .servicesCard{
+        padding: 40px 20px;
+    
+    }
+}
+
+
+@media screen and (max-width:768px) {
+    .servicesCard{
+        padding: 20px 10px;
+        
+        h1.title{
+            font-size: 20px;
+        }
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .servicesCard{
+        width: calc(100%/2);
+    
+    }
+}
+
+@media screen and (max-width:450px) {
+    .servicesCard{
+        
+        p.description{
+            font-size: 14px;
+        }
+    
+    }
+}
