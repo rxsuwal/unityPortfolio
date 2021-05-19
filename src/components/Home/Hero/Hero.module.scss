@@ -28,6 +28,8 @@
         list-style: none;
         margin: 40px auto;
         padding: 0;
+        display: flex;
+        width: fit-content;
 
         li{
           display: inline;

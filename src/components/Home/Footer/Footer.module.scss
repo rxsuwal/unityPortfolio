@@ -1,0 +1,185 @@
+@import '../../../assets/styles/variables.scss';
+@import '../../../assets/styles/@mixin.scss';
+
+.footer{
+ 
+
+    figure{
+        width: 50%;
+        margin: auto;
+    }
+    a{
+
+        color: $txtWhite;
+        font-size: 18px;
+        font-weight: 400;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        padding: 8px 0;
+        display: flex;
+    
+        &:hover{
+            color: $txtOrange;
+        }
+    
+        i{
+            color: $txtOrange;
+        }
+    
+        span{
+            padding-left: 8px;
+        }
+    }
+    
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li{
+            padding: 4px 0;
+        }
+    }
+    
+    form{
+    
+       input,textarea{
+           width: 70%;
+           margin: 8px 0;
+           font-size: 18px;
+           padding: 4px 8px;
+           background: transparent;
+           color: $txtWhite;
+           border: 1px solid #6e6e6e;
+           outline: none;
+           box-sizing: border-box;
+    
+       }
+    
+       button{
+           background-color: $bgOrange;
+           color: $txtWhite;
+            font-size: 18px;
+            padding: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #ff5617;
+    
+            &:hover{
+                background-color: transparent;
+                cursor: pointer;
+            }
+       }
+    
+    }
+
+    
+}
+
+.content{
+    background-color: #1a1a1a;
+    color: $txtWhite;
+
+    .contactDetail{
+        width: 60%;
+        margin: auto;
+        padding-bottom: 1%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        text-align: left;
+        border-bottom: 1px solid $white;
+
+        >div{
+            margin: 0 auto;
+            width: 45%;
+        }
+
+        
+    }
+    
+
+}
+
+.title{
+    font-weight: 500;
+    text-transform: capitalize;
+    text-align: left;
+    padding: 40px 0;
+    font-size: 26px;
+}
+
+
+
+.copyright{
+    background-color: #1a1a1a;
+    padding: 1%  0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        li{
+            padding: 6px 8px;
+        }
+    }
+
+}
+
+
+@media screen and (max-width:1400px) {
+    .title{
+        font-size: 18px;
+    }
+
+   .footer{
+    a{
+        font-size: 16px;
+    }
+
+    form{
+        input,textarea{
+            width: 80%;
+            font-size: 16px;
+        }
+        button{
+            font-size: 14px;
+
+        }
+    }
+   }
+    
+}
+
+@media screen and  (max-width:768px){
+    .content{
+        .contactDetail{
+            width: 80%;
+        }
+    }
+
+    .title{
+       
+    }
+}
+
+@media screen and (max-width:600px) {
+    .content{
+        .contactDetail{
+            >div{
+                width: 100%;
+            }
+        }
+    }
+    
+}
+

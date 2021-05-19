@@ -11,4 +11,101 @@
     text-align: center;
     width: 50%;
     margin: auto;
+
+    .item{
+        font-weight: 500;
+        text-align: center;
+        p{
+            font-size: 36px;    
+        }
+
+        div{
+            font-size: 18px;
+        }
+
+        span{
+            color: $txtBlue;
+            font-size: 14px;
+        }
+
+    }
+}
+
+
+@media screen and (max-width:1600px) {
+
+    .slider{
+    
+        .item{
+            p{
+                font-size: 30px;
+            }
+        }
+    }
+    
+}
+
+
+@media screen and (max-width:1400px) {
+
+    .slider{
+        .item{
+            p{
+                font-size: 22px;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width:1024px) {
+
+    .slider{
+        width: 60%;
+
+        .item{
+            p{
+                font-size: 20px;
+            }
+        }
+    }
+    
+}
+
+
+@media screen and (max-width:768px) {
+
+    .slider{
+        width: 80%;
+
+        .item{
+            p{
+                font-size: 18px;
+            }
+
+            div{
+                font-size: 16px;
+            }
+        }
+    }
+    
+}
+
+
+@media screen and (max-width:450px) {
+
+    .slider{
+        width: 80%;
+
+        .item{
+            p{
+                font-size: 16px;
+            }
+
+            div{
+                font-size: 16px;
+            }
+        }
+    }
+    
 }

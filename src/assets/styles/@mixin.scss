@@ -45,6 +45,20 @@
         @include subTitle
     }
 }
+
+@media screen and (max-width:1024px) {
+  .header{
+    max-width: 60%;
+  }
+  
+}
+
+@media screen and (max-width:768px) {
+  .header{
+    max-width: 80%;
+  }
+  
+}
   
 }
 
