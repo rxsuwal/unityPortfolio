@@ -1,0 +1,28 @@
+
+.input{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.label{
+    font-weight: 600;
+    display: block;
+    margin: 4px auto;
+}
+
+.inputElement{
+        padding: 4px 8px;
+        border: 1px solid black;
+        border-radius: 0px;
+        text-transform: capitalize;
+}
+
+.inputElement:focus{
+    outline: none;
+
+}
+
+.invalidInput{
+    border:1px solid red;
+}
