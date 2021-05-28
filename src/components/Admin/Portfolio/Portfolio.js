@@ -5,8 +5,11 @@ import styles from './Portfolio.module.scss'
 import Input from '../../UI/Form/Input/Input'
 
 import axios from '../../../axios-data-push'
+import { connect } from 'react-redux'
+import * as action from '../../../store/actions'
 
-export default class Portfolio extends Component {
+
+ class Portfolio extends Component {
 
     state ={
         portfolio:{
@@ -112,19 +115,19 @@ export default class Portfolio extends Component {
       submitData=(e)=>{
         e.preventDefault();
     
-        const portfolioData ={}
-        for (let formElementIdentifier in this.state.portfolio){
-            portfolioData[formElementIdentifier] = this.state.portfolio[formElementIdentifier].value
-        }
+        // const portfolioData ={}
+        // for (let formElementIdentifier in this.state.portfolio){
+        //     portfolioData[formElementIdentifier] = this.state.portfolio[formElementIdentifier].value
+        // }
     
     
-        const portfolio = {
-          portfolio : portfolioData
-        }
+        // const portfolio = {
+        //   portfolio : portfolioData
+        // }
     
-        axios.post('/portfolio.json',portfolio)
-              .then(response=>console.log(response.data))
-              .catch(error => console.log(error))
+        // axios.post('/portfolio.json',portfolio)
+        //       .then(response=>console.log(response.data))
+        //       .catch(error => console.log(error))
       }
 
     render(){
@@ -155,7 +158,13 @@ export default class Portfolio extends Component {
             ))}
     
     
-              <button className={styles.button} disabled={!this.state.formIsValid}>Submit</button> 
+              <button className={styles.button} 
+                      disabled={!this.state.formIsValid} 
+                      onClick={()=>this.props.savePortfolio(this.state.portfolio.title.value,
+                                                        this.state.portfolio.description.value,
+                                                        this.state.portfolio.icon.value,
+                                                       
+                                                        )}>Submit</button>
           </form>
         )
     
@@ -166,8 +175,34 @@ export default class Portfolio extends Component {
             <h2>portfolio</h2>
     
             {form}  
+
+            {this.props.portfolio.map(portfolio=>(
+              <ul>
+                <li>{portfolio.title}</li>
+                <li>{portfolio.description}</li>
+                <li>{portfolio.img}</li>
+              </ul>
+            ))}
       
           </div>
         )
       }
 }
+
+const mapStateToProps = state => {
+  return{
+    portfolio : state.portfolio.portfolio
+  }
+}
+
+const mapDispatchToProps =dispatch => {
+  return{
+    savePortfolio : (title,description,img)=>dispatch({type:action.savePortfolio,
+                                                        portfolioDATA:{title:title,
+                                                                        description:description,
+                                                                        img:img}})
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Portfolio)

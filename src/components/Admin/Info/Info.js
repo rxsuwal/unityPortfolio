@@ -6,6 +6,9 @@ import axios from '../../../axios-data-push'
 
 import Input from '../../../components/UI/Form/Input/Input.js'
 
+import * as action from '../../../store/actions'
+import {connect} from 'react-redux'
+
 
 class Info extends Component {
 
@@ -155,8 +158,6 @@ state ={
 
     this.setState({info:updatedInfo, formIsValid:formIsValid});
 
-    console.log(updatedInfoElement)
-
 
   }
 
@@ -164,19 +165,19 @@ state ={
   submitData=(e)=>{
     e.preventDefault();
 
-    const infodata ={}
-    for (let formElementIdentifier in this.state.info){
-      infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
-    }
+    // const infodata ={}
+    // for (let formElementIdentifier in this.state.info){
+    //   infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
+    // }
 
 
-    const info = {
-      info : infodata
-    }
+    // const info = {
+    //   info : infodata
+    // }
 
-    axios.post('/personalInfo.json',info)
-          .then(response=>console.log(response))
-          .catch(error => console.log(error))
+    // axios.post('/personalInfo.json',info)
+    //       .then(response=>console.log(response))
+    //       .catch(error => console.log(error))
   }
 
 
@@ -192,7 +193,7 @@ state ={
     }
 
     let form = (
-      <form onSubmit={this.submitData}>
+      <form onSubmit={this.submitData} >
         
         {formElementArray.map(formElement =>(
           <Input 
@@ -208,7 +209,15 @@ state ={
         ))}
 
 
-          <button className={styles.button} disabled={!this.state.formIsValid}>Submit</button> 
+          <button className={styles.button} 
+                  disabled={!this.state.formIsValid} 
+                  onClick={()=>this.props.saveInfo(this.state.info.name.value,
+                                                    this.state.info.email.value,
+                                                    this.state.info.address.value,
+                                                    this.state.info.contact.value,
+                                                    this.state.info.website.value,
+                                                    this.state.info.logo.value,
+                                                    )}>Submit</button> 
       </form>
     )
 
@@ -219,13 +228,42 @@ state ={
         <h2>Information</h2>
 
         {form}  
+
+        {this.props.info.map(info=>(
+         <ul>
+           <li>{info.name}</li>
+           <li>{info.email}</li>
+           <li>{info.address}</li>
+           <li>{info.contact}</li>
+           <li>{info.website}</li>
+           <li>{info.logo}</li>
+         </ul>
+       ))}
+
   
       </div>
     )
   }
 
+  
 
   
 }
 
-export default Info
+const mapStateToProps = state => {
+  return{
+
+    info : state.info.info,
+
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return{
+    saveInfo : (name,email,address,contact,website,logo)=>dispatch({type:action.saveInfo,infoDATA:{name:name,email:email,address:address,contact:contact, website:website, logo:logo}})
+  }
+
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Info)

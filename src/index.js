@@ -4,10 +4,29 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import infoReducer from './store/reducer/information'
+import portfolioReducer from './store/reducer/portfolio'
+import servicesReducer from './store/reducer/services'
+import { combineReducers, createStore } from 'redux';
+import {Provider} from 'react-redux'
+
+const rootReducer = combineReducers({
+
+  info : infoReducer,
+  services : servicesReducer,
+  portfolio : portfolioReducer,
+
+})
+
+const store = createStore(rootReducer)
+
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ <Provider store={store}> 
+   <React.StrictMode>
+      <App />
+    </React.StrictMode>
+</Provider> ,
   document.getElementById('root')
 );
 

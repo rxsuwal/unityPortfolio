@@ -6,7 +6,10 @@ import Input from '../../UI/Form/Input/Input'
 
 import axios from '../../../axios-data-push'
 
-export default class Services extends Component {
+import * as actions from '../../../store/actions'
+import { connect } from 'react-redux'
+
+ class Services extends Component {
 
     state ={
         services:{
@@ -103,7 +106,7 @@ export default class Services extends Component {
     
         this.setState({services:updatedServices, formIsValid:formIsValid});
     
-        console.log(updatedServicesElement)
+       
     
     
       }
@@ -112,19 +115,19 @@ export default class Services extends Component {
       submitData=(e)=>{
         e.preventDefault();
     
-        const servicesData ={}
-        for (let formElementIdentifier in this.state.services){
-            servicesData[formElementIdentifier] = this.state.services[formElementIdentifier].value
-        }
+        // const servicesData ={}
+        // for (let formElementIdentifier in this.state.services){
+        //     servicesData[formElementIdentifier] = this.state.services[formElementIdentifier].value
+        // }
     
     
-        const services = {
-          services : servicesData
-        }
+        // const services = {
+        //   services : servicesData
+        // }
     
-        axios.post('/services.json',services)
-              .then(response=>console.log(response.data))
-              .catch(error => console.log(error))
+        // axios.post('/services.json',services)
+        //       .then(response=>console.log(response.data))
+        //       .catch(error => console.log(error))
       }
 
     render(){
@@ -155,7 +158,12 @@ export default class Services extends Component {
             ))}
     
     
-              <button className={styles.button} disabled={!this.state.formIsValid}>Submit</button> 
+              <button className={styles.button} 
+                      disabled={!this.state.formIsValid}
+                      onClick={()=>this.props.saveServices(this.state.services.title.value,
+                                                            this.state.services.description.value,
+                                                            this.state.services.icon.value)}
+                      >Submit</button> 
           </form>
         )
     
@@ -166,8 +174,33 @@ export default class Services extends Component {
             <h2>services</h2>
     
             {form}  
+
+            {this.props.services.map(services=>(
+              <ul>
+                <li>{services.title}</li>
+                <li>{services.description}</li>
+                <li>{services.icon}</li>
+              </ul>
+            ))}
       
           </div>
         )
       }
 }
+
+const mapStateToProps = state =>{
+  return{
+    services : state.services.services
+  }
+}
+
+const mapDispatchToProps = dispatch =>{
+  return{
+    saveServices : (title,description,icon)=>dispatch({type:actions.saveServices,
+                                                       servicesData:{title:title,
+                                                                      description:description,
+                                                                        icon:icon}})
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Services)
