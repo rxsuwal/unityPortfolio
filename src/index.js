@@ -7,7 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import infoReducer from './store/reducer/information'
 import portfolioReducer from './store/reducer/portfolio'
 import servicesReducer from './store/reducer/services'
-import { combineReducers, createStore } from 'redux';
+import messageReducer from './store/reducer/message'
+import { applyMiddleware, combineReducers, createStore,compose } from 'redux';
 import {Provider} from 'react-redux'
 
 const rootReducer = combineReducers({
@@ -15,10 +16,26 @@ const rootReducer = combineReducers({
   info : infoReducer,
   services : servicesReducer,
   portfolio : portfolioReducer,
+  message : messageReducer
 
 })
 
-const store = createStore(rootReducer)
+const logger = store =>{
+  return next =>{
+      return action =>{
+          console.log('Middleware Dispatching..', action);
+          const result = next(action);
+          console.log("Middleware next state", store.getState())
+          return result
+
+      }
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)))
 
 
 ReactDOM.render(

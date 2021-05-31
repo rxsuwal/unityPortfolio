@@ -6,8 +6,9 @@ import axios from '../../../axios-data-push'
 
 import Input from '../../../components/UI/Form/Input/Input.js'
 
-import * as action from '../../../store/actions'
 import {connect} from 'react-redux'
+
+import * as action from '../../../store/actions'
 
 
 class Info extends Component {
@@ -165,19 +166,19 @@ state ={
   submitData=(e)=>{
     e.preventDefault();
 
-    // const infodata ={}
-    // for (let formElementIdentifier in this.state.info){
-    //   infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
-    // }
+    const infodata ={}
+    for (let formElementIdentifier in this.state.info){
+      infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
+    }
 
 
-    // const info = {
-    //   info : infodata
-    // }
+    const info = {
+      info : infodata
+    }
 
-    // axios.post('/personalInfo.json',info)
-    //       .then(response=>console.log(response))
-    //       .catch(error => console.log(error))
+    axios.post('/Info.json',info)
+          .then(response=>console.log(response))
+          .catch(error => console.log(error))
   }
 
 
@@ -209,6 +210,7 @@ state ={
         ))}
 
 
+
           <button className={styles.button} 
                   disabled={!this.state.formIsValid} 
                   onClick={()=>this.props.saveInfo(this.state.info.name.value,
@@ -236,7 +238,7 @@ state ={
            <li>{info.address}</li>
            <li>{info.contact}</li>
            <li>{info.website}</li>
-           <li>{info.logo}</li>
+           <li><img src={info.logo} alt=''/> </li>
          </ul>
        ))}
 
@@ -261,7 +263,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    saveInfo : (name,email,address,contact,website,logo)=>dispatch({type:action.saveInfo,infoDATA:{name:name,email:email,address:address,contact:contact, website:website, logo:logo}})
+    saveInfo : (name,email,address,contact,website,logo)=>dispatch({type:action.saveInfo,payload:{name:name,email:email,address:address,contact:contact, website:website, logo:logo}})
   }
 
 }

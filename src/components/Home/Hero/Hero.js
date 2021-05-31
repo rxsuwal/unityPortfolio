@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import axios from '../../../axios-data-push'
 
 import logo from '../../../assets/img/logo.png'
 import instagram from '../../../assets/img/ig.png'
@@ -18,12 +17,6 @@ import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
  class Home extends Component {
 
-
-  componentDidMount(){
-    axios.get('/personalInfo.json')
-          .then(respnse=>console.log(respnse.data))
-          .catch(error=>console.log(error))
-  }
 
   state ={
     showSideDrawer:false

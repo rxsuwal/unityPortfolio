@@ -5,10 +5,30 @@ import clientsLogo from '../../../assets/img/clients-logo.jpg'
 import styles from './Footer.module.scss'
 
 import Btn from '../../UI/BtnOrange/BtnOrange'
+import axios from '../../../axios-data-push'
+import { Component } from 'react'
+import SendMsg from '../SendMsg/SendMsg'
 
 
 
-const Footer = () => {
+class Footer extends Component {
+
+    state ={
+        info:[]
+    }
+
+    componentDidMount(){
+        axios.get('/Info/-MarYOCT5WmhRr8gDKzu/info.json')
+              .then(respnse=>{
+                console.log(respnse.data)
+                this.setState({info:respnse.data})
+              }
+              )
+              .catch(error=>console.log(error))
+      }
+
+
+   render(){
     return (
         <footer className={styles.footer}>
 
@@ -25,10 +45,10 @@ const Footer = () => {
                     <div class={styles.contact}>
                         <div class={styles.title}>Contact</div>
                         <ul>
-                                <li><a href="#!"><i class="fi-xnsuxl-map-marker-solid"></i> <span>121 King Street, Melbourne Victoria 3000 Australias</span></a></li>
-                                <li><a href="mailto:email@unity.unity"><i class="fi-xnluxl-envelope"></i> <span>email@unity.unity</span></a></li>
-                                <li><a href="tel:+00-000000"><i class="fi-xnsrxl-phone-solid"></i> <span>+00-000000</span></a></li>
-                                <li><a href="#!"><i class="fi-cnluxl-globe-solid"></i> <span> www.unity.unity</span></a></li>
+                                <li><a href="#!"><i class="fi-xnsuxl-map-marker-solid"></i> <span>Address</span></a></li>
+                                <li><a href="mailto:email@unity.unity"><i class="fi-xnluxl-envelope"></i> <span>emaul@email.com</span></a></li>
+                                <li><a href="tel:+00-000000"><i class="fi-xnsrxl-phone-solid"></i> <span>+977 - 123456790 </span></a></li>
+                                <li><a href="#!"><i class="fi-cnluxl-globe-solid"></i> <span>www.website.com</span></a></li>
                         </ul>   
                         
                     </div>
@@ -36,23 +56,8 @@ const Footer = () => {
                     <div className={styles.contactForm}>
 
                     <div class={styles.title}>Write us</div>
-
-                        <form action="#!">
-                                <label>
-                                    <input type="text" placeholder="Name" required />
-                                </label>
-                                    <br/>
-                                <label>
-                                    <input type="email" placeholder="Email" required />
-                                </label>
-                                <br/>
-                                <label>
-                                <textarea name="" id="" cols="30" rows="5" placeholder="Comments"/>
-
-                                </label>
-                                <br/>
-                                <button>Send</button>
-                        </form>
+                        <SendMsg/>
+                        
                     </div>
 
 
@@ -72,7 +77,11 @@ const Footer = () => {
             </div>
         </footer>
     )
+
+   }
 }
+
+
 
 export default Footer
  
