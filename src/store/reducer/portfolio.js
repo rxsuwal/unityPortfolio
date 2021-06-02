@@ -1,4 +1,4 @@
-import * as actions from '../actions'
+import * as actionType from '../actions/actionTypes'
 
 const initialState = {
     portfolio : []
@@ -7,13 +7,11 @@ const initialState = {
 const reducer = (state = initialState, action)=>{
 
     switch(action.type){
-        case actions.savePortfolio:
+        case actionType.SAVE_PORTFOLIO:
            
           return{
               ...state,
-              portfolio:state.portfolio.concat({title:action.portfolioDATA.title,
-                                                description:action.portfolioDATA.description,
-                                                    img:action.portfolioDATA.img})
+              portfolio:state.portfolio.concat(action.payload)
           }
             
 

@@ -8,7 +8,7 @@ import Input from '../../../components/UI/Form/Input/Input.js'
 
 import {connect} from 'react-redux'
 
-import * as action from '../../../store/actions'
+import * as actionCreator from '../../../store/actions/actionCreators/index'
 
 
 class Info extends Component {
@@ -166,19 +166,31 @@ state ={
   submitData=(e)=>{
     e.preventDefault();
 
-    const infodata ={}
-    for (let formElementIdentifier in this.state.info){
-      infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
+    // const infodata ={}
+    // for (let formElementIdentifier in this.state.info){
+    //   infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
+    // }
+
+
+    // const info = {
+    //   info : infodata
+    // }
+
+    // axios.post('/Info.json',info)
+    //       .then(response=>console.log(response))
+    //       .catch(error => console.log(error))
+  }
+
+  infoValue = () =>{
+    return{
+      name:this.state.info.name.value,
+                                                    email:this.state.info.email.value,
+                                                    address:this.state.info.address.value,
+                                                    contact: this.state.info.contact.value,
+                                                    website: this.state.info.website.value,
+                                                    logo:this.state.info.logo.value,
+
     }
-
-
-    const info = {
-      info : infodata
-    }
-
-    axios.post('/Info.json',info)
-          .then(response=>console.log(response))
-          .catch(error => console.log(error))
   }
 
 
@@ -213,13 +225,7 @@ state ={
 
           <button className={styles.button} 
                   disabled={!this.state.formIsValid} 
-                  onClick={()=>this.props.saveInfo(this.state.info.name.value,
-                                                    this.state.info.email.value,
-                                                    this.state.info.address.value,
-                                                    this.state.info.contact.value,
-                                                    this.state.info.website.value,
-                                                    this.state.info.logo.value,
-                                                    )}>Submit</button> 
+                  onClick={()=>this.props.saveInfo(this.infoValue())}>Submit</button> 
       </form>
     )
 
@@ -263,7 +269,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    saveInfo : (name,email,address,contact,website,logo)=>dispatch({type:action.saveInfo,payload:{name:name,email:email,address:address,contact:contact, website:website, logo:logo}})
+    saveInfo : (payload)=>dispatch(actionCreator.saveInfo(payload))
   }
 
 }

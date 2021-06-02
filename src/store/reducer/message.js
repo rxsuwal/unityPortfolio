@@ -1,4 +1,4 @@
-import * as actions from '../actions'
+import * as actionType from '../actions/actionTypes'
 
 const initialState = {
     message :[]
@@ -7,8 +7,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
     switch(action.type){
-        case actions.sendMessage:
-            console.log(action.payload)
+        case actionType.SEND_MSG:
             return{
                 ...state,
                 message:state.message.concat(action.payload)

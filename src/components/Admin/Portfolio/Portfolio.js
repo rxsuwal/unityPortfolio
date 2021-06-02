@@ -6,7 +6,7 @@ import Input from '../../UI/Form/Input/Input'
 
 import axios from '../../../axios-data-push'
 import { connect } from 'react-redux'
-import * as action from '../../../store/actions'
+import * as actionCreator from '../../../store/actions/actionCreators/index'
 
 
  class Portfolio extends Component {
@@ -130,6 +130,15 @@ import * as action from '../../../store/actions'
         //       .catch(error => console.log(error))
       }
 
+      portfolioValue=()=>{
+        return{
+          title :this.state.portfolio.title.value,
+          description:this.state.portfolio.description.value,
+           icon: this.state.portfolio.icon.value,
+
+        }
+      }
+
     render(){
 
         const formElementArray = [];
@@ -160,11 +169,7 @@ import * as action from '../../../store/actions'
     
               <button className={styles.button} 
                       disabled={!this.state.formIsValid} 
-                      onClick={()=>this.props.savePortfolio(this.state.portfolio.title.value,
-                                                        this.state.portfolio.description.value,
-                                                        this.state.portfolio.icon.value,
-                                                       
-                                                        )}>Submit</button>
+                      onClick={()=>this.props.savePortfolio(this.portfolioValue())}>Submit</button>
           </form>
         )
     
@@ -180,7 +185,7 @@ import * as action from '../../../store/actions'
               <ul>
                 <li>{portfolio.title}</li>
                 <li>{portfolio.description}</li>
-                <li>{portfolio.img}</li>
+                <li>{portfolio.icon}</li>
               </ul>
             ))}
       
@@ -197,10 +202,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =dispatch => {
   return{
-    savePortfolio : (title,description,img)=>dispatch({type:action.savePortfolio,
-                                                        portfolioDATA:{title:title,
-                                                                        description:description,
-                                                                        img:img}})
+    savePortfolio : (payload)=>dispatch(actionCreator.savePortfolio(payload))
   }
 }
 

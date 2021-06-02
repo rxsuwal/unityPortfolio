@@ -1,4 +1,4 @@
-import * as actions from '../actions'
+import * as actionType from '../actions/actionTypes'
 
 const initialState = {
     info : []
@@ -7,17 +7,10 @@ const initialState = {
 const reducer = (state = initialState, action)=>{
 
     switch(action.type){
-        case actions.saveInfo:
-           
-           
+        case actionType.SAVE_INFO:
           return{
               ...state,
-              info:state.info.concat({name:action.payload.name,
-                                      email:action.payload.email,
-                                      address:action.payload.address,
-                                      contact:action.payload.contact,
-                                      website:action.payload.website,
-                                        logo:action.payload.logo})
+              info:state.info.concat(action.payload)
           }
             
 

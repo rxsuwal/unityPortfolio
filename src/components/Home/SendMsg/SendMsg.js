@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import Input from '../../UI/Form/Input/Input'
 
-import * as action from '../../../store/actions'
+import * as actionCreator from '../../../store/actions/actionCreators/index'
 
 class SendMsg extends Component {
 
@@ -151,9 +151,7 @@ class SendMsg extends Component {
     
               <button 
                       disabled={!this.state.formIsValid} 
-                      onClick={()=>this.props.sendMessage(this.msgPayload()
-                                                       
-                                                        )}>Submit</button>
+                      onClick={()=>this.props.sendMessage(this.msgPayload())}>Submit</button>
           </form>
         )
 
@@ -180,8 +178,7 @@ const mapStateToProps = state => {
   
 const mapDispatchToProps = dispatch => {
     return{
-      sendMessage : (payload)=>dispatch({type:action.sendMessage,
-                                                          payload})
+      sendMessage : (payload)=>dispatch(actionCreator.sendMsg(payload))
     }
   }
 

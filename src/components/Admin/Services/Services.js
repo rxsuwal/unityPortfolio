@@ -6,7 +6,7 @@ import Input from '../../UI/Form/Input/Input'
 
 import axios from '../../../axios-data-push'
 
-import * as actions from '../../../store/actions'
+import * as actionCreator from '../../../store/actions/actionCreators/index'
 import { connect } from 'react-redux'
 
  class Services extends Component {
@@ -130,6 +130,15 @@ import { connect } from 'react-redux'
         //       .catch(error => console.log(error))
       }
 
+      servicesValue =()=>{
+        return{
+          title: this.state.services.title.value,
+          description: this.state.services.description.value,
+          icon: this.state.services.icon.value
+
+        }
+      }
+
     render(){
 
         const formElementArray = [];
@@ -160,9 +169,7 @@ import { connect } from 'react-redux'
     
               <button className={styles.button} 
                       disabled={!this.state.formIsValid}
-                      onClick={()=>this.props.saveServices(this.state.services.title.value,
-                                                            this.state.services.description.value,
-                                                            this.state.services.icon.value)}
+                      onClick={()=>this.props.saveServices(this.servicesValue())}
                       >Submit</button> 
           </form>
         )
@@ -196,10 +203,7 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return{
-    saveServices : (title,description,icon)=>dispatch({type:actions.saveServices,
-                                                       servicesData:{title:title,
-                                                                      description:description,
-                                                                        icon:icon}})
+    saveServices : (payload)=>dispatch(actionCreator.saveServices(payload))
   }
 }
 
