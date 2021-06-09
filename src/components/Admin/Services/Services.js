@@ -4,10 +4,13 @@ import styles from './Services.module.scss'
 
 import Input from '../../UI/Form/Input/Input'
 
-import axios from '../../../axios-data-push'
-
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 import { connect } from 'react-redux'
+import Navbar from '../Navbar/Navbar'
+import ImgUpload from '../../UI/ImgUpload/ImgUpload'
+
+import {storage} from '../../../firebase/index'
+
 
  class Services extends Component {
 
@@ -41,22 +44,27 @@ import { connect } from 'react-redux'
                     valid:false,
                     touched:false
                     },
-             icon:{
-                elementType:'input',
-                elementConfig:{
-                    type:'file',
-                    placeholder:'services icons'
+            //  icon:{
+            //     elementType:'input',
+            //     elementConfig:{
+            //         type:'file',
+            //         placeholder:'services icons'
 
-                },
-                value:'',
-                validation:{
-                    required:true,
-                },
-                valid:false,
-                touched:false
-                },
+            //     },
+            //     value:'',
+            //     validation:{
+            //         required:true,
+            //     },
+            //     valid:false,
+            //     touched:false
+            //     },
         },
-        formIsValid:false
+        formIsValid:false,
+        icon:{
+          url:'',
+          progress:'',
+          valid:false
+        }
     }
 
 
@@ -100,7 +108,7 @@ import { connect } from 'react-redux'
         let formIsValid = true;
     
         for(let inputIdentifier in updatedServices){
-          formIsValid = updatedServices[inputIdentifier].valid && formIsValid
+          formIsValid = updatedServices[inputIdentifier].valid && formIsValid && this.state.icon.url
         }
     
     
@@ -109,6 +117,43 @@ import { connect } from 'react-redux'
        
     
     
+      }
+
+      imgUploadOnChange = (e)=>{
+        const img = e.target.files[0]
+    // console.log(img)
+    const uploadImg = storage.ref(`images/services/${img.name}`).put(img);
+    uploadImg.on(
+      'state_changed',
+      snapshot =>{
+        const progress = Math.round(
+          (snapshot.bytesTransferred/snapshot.totalBytes)*100
+        )
+        this.setState({ 
+          icon :{...this.state.icon, progress}
+        })
+        console.log(progress)
+      },
+
+      error =>{
+        console.log(error)
+      },
+
+      ()=>{
+        storage.ref('images/services')
+                .child(img.name)
+                .getDownloadURL()
+                .then(url =>{
+                  {console.log(url)}
+                  this.setState({
+                    icon : {...this.state.icon, url,valid:true},
+                    formIsValid:true
+                  })
+                })
+      }
+      
+    )
+
       }
     
       
@@ -134,7 +179,7 @@ import { connect } from 'react-redux'
         return{
           title: this.state.services.title.value,
           description: this.state.services.description.value,
-          icon: this.state.services.icon.value
+          icon: this.state.icon.url
 
         }
       }
@@ -166,7 +211,8 @@ import { connect } from 'react-redux'
                   />
             ))}
     
-    
+              <ImgUpload change={(e)=>this.imgUploadOnChange(e)} progress={this.state.icon.progress}/>
+
               <button className={styles.button} 
                       disabled={!this.state.formIsValid}
                       onClick={()=>this.props.saveServices(this.servicesValue())}
@@ -177,7 +223,7 @@ import { connect } from 'react-redux'
     
         return (
           <div className={styles.services}>
-      
+            <Navbar/>
             <h2>services</h2>
     
             {form}  
@@ -186,7 +232,7 @@ import { connect } from 'react-redux'
               <ul>
                 <li>{services.title}</li>
                 <li>{services.description}</li>
-                <li>{services.icon}</li>
+                <li><img src={services.icon} alt=''/></li>
               </ul>
             ))}
       

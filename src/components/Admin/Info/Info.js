@@ -2,16 +2,21 @@ import React, { Component } from 'react'
 
 import styles from './Info.module.scss'
 
-import axios from '../../../axios-data-push'
 
 import Input from '../../../components/UI/Form/Input/Input.js'
 
 import {connect} from 'react-redux'
 
+import Spinner from '../../UI/Spinner/Spinner'
 import * as actionCreator from '../../../store/actions/actionCreators/index'
+import ImgUpload from '../../UI/ImgUpload/ImgUpload'
+import { storage } from '../../../firebase'
+import Navbar from '../Navbar/Navbar'
+
 
 
 class Info extends Component {
+
 
 state ={
 
@@ -79,7 +84,7 @@ state ={
     website :{
       elementType:'input',
       elementConfig:{
-        type:'text',
+        type:'url',
         placeholder:'Website'
 
       },
@@ -90,22 +95,38 @@ state ={
       valid:false,
       touched:false
     },
-    logo :{
-      elementType:'input',
-      elementConfig:{
-        type:'file',
-        placeholder:'logo'
-
-      },
-      value:'',
-      validation:{
-        required:true,
-      },
-      valid:false,
-      touched:false
-    }
+    // logo :{
+    //   elementType:'input',
+    //   elementConfig:{
+    //     type:'file',
+    //     placeholder:'logo'
+  
+    //   },
+    //   value:'',
+    //   validation:{
+    //     required:true,
+    //   },
+    //   valid:false,
+    //   touched:false
+    // }
+    
   },
-  formIsValid:false
+  formIsValid:false,
+  logo:{
+    url:'',
+    progress:'',
+    valid:false
+     }
+  
+ 
+};
+
+
+
+componentDidMount(){
+  this.props.initInfo()
+  console.log(this.props.info.name)
+ 
 }
 
 
@@ -135,6 +156,7 @@ state ={
 
 
   inputChangeHandler =(e, inputIdentifier) =>{
+    
 
     let updatedInfo = {
       ...this.state.info
@@ -143,55 +165,88 @@ state ={
     let updatedInfoElement = {
       ...updatedInfo[inputIdentifier]
     }
-   
-    updatedInfoElement.value = e.target.value;
+
+
+   updatedInfoElement.value = e.target.value;
+
     updatedInfoElement.valid = this.checkValidity(updatedInfoElement.value, updatedInfoElement.validation)
     updatedInfoElement.touched = true;
     updatedInfo[inputIdentifier] = updatedInfoElement;
 
-
     let formIsValid = true;
 
     for(let inputIdentifier in updatedInfo){
-      formIsValid = updatedInfo[inputIdentifier].valid && formIsValid
+      formIsValid = updatedInfo[inputIdentifier].valid && formIsValid && this.state.logo.valid
     }
 
+    this.setState({info:updatedInfo,formIsValid:formIsValid})
 
-    this.setState({info:updatedInfo, formIsValid:formIsValid});
-
-
+    // if(this.state.logo.valid){
+    //   this.setState({formIsValid:true})
+    // }
   }
 
   
+  imgOnchange = (e)=>{
+
+    const img = e.target.files[0]
+    // console.log(img)
+    const uploadImg = storage.ref(`images/logo/${img.name}`).put(img);
+    uploadImg.on(
+      'state_changed',
+      snapshot =>{
+        const progress = Math.round(
+          (snapshot.bytesTransferred/snapshot.totalBytes)*100
+        )
+        this.setState({ 
+          logo :{...this.state.logo, progress}
+        })
+        console.log(progress)
+      },
+
+      error =>{
+        console.log(error)
+      },
+
+      ()=>{
+        storage.ref('images/logo')
+                .child(img.name)
+                .getDownloadURL()
+                .then(url =>{
+                  {console.log(url)}
+                  this.setState({
+                    logo : {...this.state.logo, url,valid:true},
+                    formIsValid:true
+                  })
+                })
+      }
+
+    )
+    
+
+}
+
+
   submitData=(e)=>{
     e.preventDefault();
-
-    // const infodata ={}
-    // for (let formElementIdentifier in this.state.info){
-    //   infodata[formElementIdentifier] = this.state.info[formElementIdentifier].value
-    // }
-
-
-    // const info = {
-    //   info : infodata
-    // }
-
-    // axios.post('/Info.json',info)
-    //       .then(response=>console.log(response))
-    //       .catch(error => console.log(error))
   }
 
   infoValue = () =>{
     return{
       name:this.state.info.name.value,
-                                                    email:this.state.info.email.value,
-                                                    address:this.state.info.address.value,
-                                                    contact: this.state.info.contact.value,
-                                                    website: this.state.info.website.value,
-                                                    logo:this.state.info.logo.value,
+      email:this.state.info.email.value,
+      address:this.state.info.address.value,
+      contact: this.state.info.contact.value,
+      website: this.state.info.website.value,
+      logo:this.state.logo.url,
 
     }
   }
+
+  
+
+ 
+
 
 
   render(){
@@ -221,32 +276,49 @@ state ={
               />
         ))}
 
+      <ImgUpload change={(e)=>this.imgOnchange(e)} progress={this.state.logo.progress}/>
+      {console.log(this.state.logo)}
 
+      <button className={styles.button} 
+                disabled={!this.state.formIsValid} 
+                onClick={()=>this.props.saveInfo(this.infoValue())}>Submit</button> 
 
-          <button className={styles.button} 
-                  disabled={!this.state.formIsValid} 
-                  onClick={()=>this.props.saveInfo(this.infoValue())}>Submit</button> 
+         
       </form>
     )
+
+    let details = null
+    {this.props.info.name ? 
+          details =(
+          <ul>
+          <li>{this.props.info.name}</li>
+          <li>{this.props.info.email}</li>
+          <li>{this.props.info.address}</li>
+          <li>{this.props.info.contact}</li>
+          <li>{this.props.info.website}</li>
+          <li><img src={this.props.info.logo} alt=''/> </li>
+        </ul>
+        ) : 
+        details=(<Spinner/>)
+      }
+
+   
 
 
     return (
       <div className={styles.admin}>
+
+        <Navbar/>
   
         <h2>Information</h2>
 
-        {form}  
+        {form} 
 
-        {this.props.info.map(info=>(
-         <ul>
-           <li>{info.name}</li>
-           <li>{info.email}</li>
-           <li>{info.address}</li>
-           <li>{info.contact}</li>
-           <li>{info.website}</li>
-           <li><img src={info.logo} alt=''/> </li>
-         </ul>
-       ))}
+        
+
+
+        {details} 
+       
 
   
       </div>
@@ -269,7 +341,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    saveInfo : (payload)=>dispatch(actionCreator.saveInfo(payload))
+    saveInfo : (payload)=>dispatch(actionCreator.saveInfo(payload)),
+    initInfo : ()=>dispatch(actionCreator.initInfo())
   }
 
 }

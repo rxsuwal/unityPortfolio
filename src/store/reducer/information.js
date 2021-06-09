@@ -10,8 +10,14 @@ const reducer = (state = initialState, action)=>{
         case actionType.SAVE_INFO:
           return{
               ...state,
-              info:state.info.concat(action.payload)
+              info:action.payload
           }
+
+          case actionType.SET_INFO:
+              return{
+                  ...state,
+                  info:action.payload
+              }
             
 
         default:

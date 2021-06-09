@@ -7,6 +7,7 @@ import Input from '../../UI/Form/Input/Input'
 import axios from '../../../axios-data-push'
 import { connect } from 'react-redux'
 import * as actionCreator from '../../../store/actions/actionCreators/index'
+import Navbar from '../Navbar/Navbar'
 
 
  class Portfolio extends Component {
@@ -176,10 +177,12 @@ import * as actionCreator from '../../../store/actions/actionCreators/index'
     
         return (
           <div className={styles.portfolio}>
+            <Navbar/>
       
             <h2>portfolio</h2>
     
             {form}  
+            {console.log(this.props.portfolio)}
 
             {this.props.portfolio.map(portfolio=>(
               <ul>

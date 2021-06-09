@@ -1,7 +1,7 @@
-export {saveInfo} from './saveInfo'
+export {saveInfo, initInfo} from './saveInfo'
 
 export{saveServices} from './saveServices'
 
 export{savePortfolio} from './savePortfolio'
 
-export {sendMsg} from './sendMsg'
+export {sendMsg, initMsg} from './sendMsg'

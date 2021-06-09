@@ -13,6 +13,12 @@ const reducer = (state = initialState, action) => {
                 message:state.message.concat(action.payload)
 
             }
+        case actionType.SET_MSG:
+            return{
+                ...state,
+                message:action.payload
+            }
+            
         default:
             return state
     }

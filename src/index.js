@@ -10,6 +10,7 @@ import servicesReducer from './store/reducer/services'
 import messageReducer from './store/reducer/message'
 import { applyMiddleware, combineReducers, createStore,compose } from 'redux';
 import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
 
@@ -27,7 +28,7 @@ const logger = store =>{
           const result = next(action);
           console.log("Middleware next state", store.getState())
           return result
-
+ 
       }
   }
 }
@@ -35,7 +36,7 @@ const logger = store =>{
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger)))
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger,thunk)))
 
 
 ReactDOM.render(

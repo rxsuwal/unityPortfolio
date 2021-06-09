@@ -13,6 +13,12 @@ const reducer = (state = initialState, action)=>{
               ...state,
               portfolio:state.portfolio.concat(action.payload)
           }
+          case actionType.SET_PORTFOLIO:
+           
+            return{
+                ...state,
+                portfolio:state.portfolio.concat(action.payload)
+            }
             
 
         default:
