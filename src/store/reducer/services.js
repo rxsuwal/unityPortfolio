@@ -14,6 +14,12 @@ const reducer = (state = initialState,action) =>{
                 ...state,
                 services:state.services.concat(action.payload)
             }
+        case actionType.SET_SERVICES:
+                console.log(action.payload)
+                return{
+                    ...state,
+                    services:state.services.concat(action.payload)
+                }
 
         default:
             return state

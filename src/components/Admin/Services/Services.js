@@ -67,6 +67,10 @@ import {storage} from '../../../firebase/index'
         }
     }
 
+    componentDidMount(){
+      this.props.initServices();
+    }
+
 
     checkValidity = (value, rules) =>{
 
@@ -228,13 +232,16 @@ import {storage} from '../../../firebase/index'
     
             {form}  
 
-            {this.props.services.map(services=>(
+           <div className={styles.serviceList}>
+           {this.props.services.map(services=>(
               <ul>
                 <li>{services.title}</li>
                 <li>{services.description}</li>
                 <li><img src={services.icon} alt=''/></li>
               </ul>
             ))}
+            {console.log(this.props.services)}
+           </div>
       
           </div>
         )
@@ -249,7 +256,8 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch =>{
   return{
-    saveServices : (payload)=>dispatch(actionCreator.saveServices(payload))
+    saveServices : (payload)=>dispatch(actionCreator.saveServices(payload)),
+    initServices : ()=>dispatch(actionCreator.initServices())
   }
 }
 

@@ -1,0 +1,17 @@
+.portfolioList{
+    display: flex;
+    flex-wrap: wrap;
+   
+
+    article{
+        &:hover{
+            cursor: pointer;
+            background-color: black;
+            color: white;
+        }
+
+        margin: auto;
+        width: fit-content;
+        transition: 0.3s ease-in-out;
+    }
+}

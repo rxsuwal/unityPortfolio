@@ -8,7 +8,9 @@ import axios from '../../../axios-data-push'
 import { connect } from 'react-redux'
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 import Navbar from '../Navbar/Navbar'
+import ImgUpload from '../../UI/ImgUpload/ImgUpload'
 
+import {storage} from  '../../../firebase/index'
 
  class Portfolio extends Component {
 
@@ -42,22 +44,13 @@ import Navbar from '../Navbar/Navbar'
                     valid:false,
                     touched:false
                     },
-             icon:{
-                elementType:'input',
-                elementConfig:{
-                    type:'file',
-                    placeholder:'portfolio icons'
-
-                },
-                value:'',
-                validation:{
-                    required:true,
-                },
-                valid:false,
-                touched:false
-                },
         },
-        formIsValid:false
+        formIsValid:false,
+        icon:{
+          url:'',
+          valid:false,
+          progress:''
+        }
     }
 
 
@@ -101,43 +94,70 @@ import Navbar from '../Navbar/Navbar'
         let formIsValid = true;
     
         for(let inputIdentifier in updatedportfolio){
-          formIsValid = updatedportfolio[inputIdentifier].valid && formIsValid
+          formIsValid = updatedportfolio[inputIdentifier].valid && formIsValid && this.state.icon.valid
         }
-    
     
         this.setState({portfolio:updatedportfolio, formIsValid:formIsValid});
     
-        console.log(updatedportfolioElement)
+        // console.log(updatedportfolioElement)
     
     
+      }
+
+      imgUploadOnChange = (e)=>{
+
+        const img = e.target.files[0]
+    // console.log(img)
+    const uploadImg = storage.ref(`images/portfolio/${img.name}`).put(img);
+    uploadImg.on(
+      'state_changed',
+      snapshot =>{
+        const progress = Math.round(
+          (snapshot.bytesTransferred/snapshot.totalBytes)*100
+        )
+        this.setState({ 
+          icon :{...this.state.icon, progress}
+        })
+        console.log(progress)
+      },
+
+      error =>{
+        console.log(error)
+      },
+
+      ()=>{
+        storage.ref('images/portfolio')
+                .child(img.name)
+                .getDownloadURL()
+                .then(url =>{
+                  {console.log(url)}
+                  this.setState({
+                    icon : {...this.state.icon, url,valid:true},
+                    formIsValid:true
+                  })
+                })
+      }
+      
+    )
+
       }
     
       
       submitData=(e)=>{
         e.preventDefault();
-    
-        // const portfolioData ={}
-        // for (let formElementIdentifier in this.state.portfolio){
-        //     portfolioData[formElementIdentifier] = this.state.portfolio[formElementIdentifier].value
-        // }
-    
-    
-        // const portfolio = {
-        //   portfolio : portfolioData
-        // }
-    
-        // axios.post('/portfolio.json',portfolio)
-        //       .then(response=>console.log(response.data))
-        //       .catch(error => console.log(error))
       }
 
       portfolioValue=()=>{
         return{
           title :this.state.portfolio.title.value,
           description:this.state.portfolio.description.value,
-           icon: this.state.portfolio.icon.value,
+           icon: this.state.icon.url,
 
         }
+      }
+
+      componentDidMount(){
+        this.props.initPortfolio();
       }
 
     render(){
@@ -166,7 +186,9 @@ import Navbar from '../Navbar/Navbar'
                   changed={(e) => this.inputChangeHandler(e,formElement.id)}
                   />
             ))}
-    
+
+  <ImgUpload change={(e)=>this.imgUploadOnChange(e)} progress={this.state.icon.progress}/>
+
     
               <button className={styles.button} 
                       disabled={!this.state.formIsValid} 
@@ -180,17 +202,21 @@ import Navbar from '../Navbar/Navbar'
             <Navbar/>
       
             <h2>portfolio</h2>
-    
             {form}  
-            {console.log(this.props.portfolio)}
+        
 
-            {this.props.portfolio.map(portfolio=>(
-              <ul>
-                <li>{portfolio.title}</li>
-                <li>{portfolio.description}</li>
-                <li>{portfolio.icon}</li>
-              </ul>
+         <div className={styles.portfolioList}>   
+           {this.props.portfolio.map(portfolio=>(
+              <article>
+                <h4>{portfolio.title}</h4>
+                <p>{portfolio.description}</p>
+                <picture><img src={portfolio.icon} alt=''/></picture>
+                <button onClick={(id)=>this.props.deletePortfolio(id)}>Delete</button>
+                <button>Edit</button>
+              </article>
             ))}
+            </div>
+
       
           </div>
         )
@@ -205,7 +231,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =dispatch => {
   return{
-    savePortfolio : (payload)=>dispatch(actionCreator.savePortfolio(payload))
+    savePortfolio : (payload)=>dispatch(actionCreator.savePortfolio(payload)),
+    initPortfolio : ()=>dispatch(actionCreator.initPortfolio()),
+    deletePortfolio : (e)=>dispatch(actionCreator.deletePortfolio(e))
   }
 }
 
