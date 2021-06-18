@@ -62,7 +62,7 @@ class Footer extends Component {
             
             <div className={styles.copyright}>
                  <ul>
-                    <li><a href="#">© Unity. Allright reserved.</a></li>
+                    <li><a href="#!">© Unity. Allright reserved.</a></li>
                     <li><a href="#!">Terms of use.</a></li>
                     <li><a href="#!"> privacy policy</a></li>
                  </ul>

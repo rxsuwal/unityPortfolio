@@ -30,7 +30,7 @@ export const initServices = ()=>{
                     for ( let key in rspnse.data){
                         data.push({
                             ...rspnse.data[key],
-                            key:key
+                            id:key
                         })
                     }
                     dispatch(setServices(data))
@@ -38,4 +38,23 @@ export const initServices = ()=>{
                 .catch(err=> console.log(err))
     }
 
+}
+
+export const deleteServicesLocal =(id)=>{
+    return{
+        type:actionType.DELETE_SERVICES,
+        payload:id
+    }
+}
+
+export const deleteServices =(id)=>{
+    return dispatch=>{
+        axios.delete('Services/' + id +".json")
+                .then(rspnse =>{
+                    dispatch(deleteServicesLocal(id))
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+    }
 }

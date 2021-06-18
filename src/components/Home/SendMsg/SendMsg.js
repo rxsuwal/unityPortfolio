@@ -71,9 +71,10 @@ class SendMsg extends Component {
         if ( rules.maxLength){
           isValid = value.length <= rules.maxLength && isValid
         }
-    
+        console.log(isValid)
         return isValid
-    
+        
+        
       }
     
     
@@ -109,8 +110,58 @@ class SendMsg extends Component {
 
       submit = (e) =>{
           e.preventDefault();
-          console.log('object')
-      }
+          this.setState(
+           {
+            ...this.state,
+            message:{
+              name:{
+                  elementType:'input',
+                  elementConfig:{
+                      type:'text',
+                      placeholder:'Name'
+  
+                  },
+                  value:'',
+                  validation:{
+                      required:true,
+                  },
+                  valid:false,
+                  touched:false
+                  },
+              email:{
+                  elementType:'input',
+                  elementConfig:{
+                      type:'email',
+                      placeholder:'Email'
+  
+                  },
+                  value:'',
+                  validation:{
+                      required:true,
+                  },
+                  valid:false,
+                  touched:false
+                  },
+              description:{
+                      elementType:'textarea',
+                      elementConfig:{
+                          type:'text',
+                          placeholder:'description'
+  
+                      },
+                      value:'',
+                      validation:{
+                          required:true,
+                      },
+                      valid:false,
+                      touched:false
+                      },
+               
+          },
+         
+           }
+          )
+               }
 
       msgPayload = () => {
         return{
@@ -137,6 +188,7 @@ class SendMsg extends Component {
             
             {formElementArray.map(formElement =>(
               <Input 
+                  ref={(ref) => this.Input= ref}
                   key={formElement.id}
                   elementType={formElement.config.elementType}
                   elementConfig={formElement.config.elementConfig}
@@ -150,7 +202,7 @@ class SendMsg extends Component {
     
     
               <button 
-                      disabled={!this.state.formIsValid} 
+                      
                       onClick={()=>this.props.sendMessage(this.msgPayload())}>Submit</button>
           </form>
         )

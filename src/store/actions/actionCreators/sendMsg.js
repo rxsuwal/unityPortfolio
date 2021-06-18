@@ -13,10 +13,7 @@ export const sendMsg = (payload) =>{
                     console.log('Error', err)
                 })
     }
-    // return{
-    //     type:actionType.SEND_MSG,
-    //     payload:payload
-    // }
+  
 }
 
 export const setMsg = (payload)=>{
@@ -31,6 +28,7 @@ export const initMsg = ()=>{
     return dispatch=>{
         axios.get('/Message.json')
                 .then(rspnse=>{
+                    console.log(rspnse)
                     const msg=[]
                     for ( let key in rspnse.data){
                         msg.push({
@@ -43,5 +41,25 @@ export const initMsg = ()=>{
                 .catch(err=>{
                     console.log(err)
                 })
+    }
+}
+
+export const deleteMsgLocal =(id)=>{
+    return{
+        type:actionType.DELETE_MSG,
+        payload:id
+    }
+}
+export const deleteMsg =(id)=>{
+    return dispatch=>{
+        axios.delete('Message/' + id +'.json')
+                .then(rspnse=>{
+                    console.log(rspnse.data)
+                    dispatch(deleteMsgLocal(id))
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+
     }
 }

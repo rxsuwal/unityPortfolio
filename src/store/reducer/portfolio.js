@@ -22,8 +22,12 @@ const reducer = (state = initialState, action)=>{
             }
 
         case actionType.DELETE_PORTFOLIO:
+            console.log(action.payload)
            
-                return console.log( state)
+           return{
+               ...state,
+               portfolio:state.portfolio.filter(state => state.id !== action.payload)
+           }
             
 
         default:

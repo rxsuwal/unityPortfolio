@@ -1,14 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+
+import * as styles from './Navbar.module.scss'
 
 function Navbar() {
     return (
         <nav>
             <ul>
-                <Link to='/admin/message'>Message</Link>
-                <Link to='/admin/portfolio'>Portfolio</Link>
-                <Link to='/admin/services'>services</Link>
-                <Link to='/admin'>information</Link>
+                <li><NavLink activeClassName={styles.activeLink} to='/admin/information'>information</NavLink></li>
+                <li> <NavLink activeClassName={styles.activeLink} to='/admin/services'>services</NavLink></li>
+                <li><NavLink activeClassName={styles.activeLink} to='/admin/portfolio'>Portfolio</NavLink></li>
+                <li><NavLink activeClassName={styles.activeLink} to='/admin/message'>Message</NavLink></li>
+                
+               
             </ul>
         </nav>
     )

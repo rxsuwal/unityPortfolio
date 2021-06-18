@@ -1,0 +1,21 @@
+.layout{
+    display: flex;
+    align-items: center;
+   
+}
+
+aside{
+    width: 25%;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: black;
+    height: 100%;
+
+}
+
+main{
+    width: 75%;
+    margin-left: 25%;
+}
+

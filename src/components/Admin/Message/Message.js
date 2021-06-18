@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Spinner from '../../UI/Spinner/Spinner'
 
 import * as actionCreator from '../../../store/actions/actionCreators/index'
-import Navbar from '../Navbar/Navbar'
+import Layout from '../Layout/Layout'
 
  class Message extends Component {
 
@@ -21,23 +21,27 @@ import Navbar from '../Navbar/Navbar'
                     <li>{msg.name}</li>
                     <li>{msg.email}</li>
                     <li>{msg.description}</li>
+                    <button onClick={()=>this.props.deleteMsg(msg.id)}>DELETE</button>
                 </ul>
                 ))
             )
+
+            if(msglist.length < 1){
+                msglist=(<p>No messages YET</p>)
+    
+            }
         }
+       
         else{
             msglist=(<Spinner/>)
         }
         
         return (
-            <div>
-                <Navbar/>
+            <Layout>
                 <h2>Message</h2>
-               { console.log(this.props.message)}
 
-                    {msglist}
-                
-            </div>
+                {msglist}
+            </Layout>
         )
     }
 }
@@ -51,7 +55,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return{
-        initMsg : ()=>dispatch(actionCreator.initMsg())
+        initMsg : ()=>dispatch(actionCreator.initMsg()),
+        deleteMsg : (id)=>dispatch(actionCreator.deleteMsg(id))
 
     }
 }

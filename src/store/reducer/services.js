@@ -20,6 +20,11 @@ const reducer = (state = initialState,action) =>{
                     ...state,
                     services:state.services.concat(action.payload)
                 }
+        case actionType.DELETE_SERVICES:
+            return{
+                ...state,
+                services:state.services.filter(state => state.id !== action.payload)
+            }
 
         default:
             return state

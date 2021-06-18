@@ -18,6 +18,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 message:action.payload
             }
+        case actionType.DELETE_MSG:
+            return{
+                ...state,
+                message:state.message.filter(state=> state.id !== action.payload)
+            }
             
         default:
             return state

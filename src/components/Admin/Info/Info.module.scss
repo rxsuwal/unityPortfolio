@@ -1,4 +1,24 @@
-.button:disabled{
+button:disabled{
     cursor:not-allowed ;
 
+}
+
+
+.details{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    text-align: left;
+
+
+    >div{
+        margin: auto;
+       
+    }
+
+   
+    picture{
+        width: 25%;
+        margin: auto;
+    }
 }

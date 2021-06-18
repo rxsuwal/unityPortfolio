@@ -14,6 +14,7 @@ const Sidedrawer = (props) => {
         <div >
             <Backdrop show={props.open} clicked={props.closed}/>
             <div className={attachedClasses.join(' ')} >
+                {props.children}
             
             </div>
             

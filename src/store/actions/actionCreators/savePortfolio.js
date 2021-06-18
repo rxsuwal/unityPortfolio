@@ -38,15 +38,23 @@ export const initPortfolio = () =>{
     }
 }
 
+export const deletePortfolioLocal =(id)=>{
+    return{
+        type:actionType.DELETE_PORTFOLIO,
+        payload:id 
+    }
+}
 
-export const deletePortfolio = (e)=>{
-    console.log(e)
+export const deletePortfolio = (id)=>{
 
-//   return dispatch=>{
-//       axios.delete('Portfolio.json/')
-//             .then(rspnse=>{
-//                 console.log(rspnse)
-//             })
-//             .catch(err=>console.log(err))
-//   }
+    console.log(id)
+
+  return dispatch=>{
+      axios.delete('Portfolio/' + id + '.json')
+            .then(rspnse=>{
+                console.log(rspnse)
+               dispatch(deletePortfolioLocal(id))
+            })
+            .catch(err=>console.log(err))
+  }
 }

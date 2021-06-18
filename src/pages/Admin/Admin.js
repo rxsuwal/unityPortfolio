@@ -1,6 +1,5 @@
 import React from 'react'
 
-import styles from './Admin.module.scss'
 import Info from '../../components/Admin/Info/Info'
 import Services from '../../components/Admin/Services/Services'
 import Portfolio from '../../components/Admin/Portfolio/Portfolio'
@@ -31,8 +30,11 @@ const Admin = () => {
                 <Message/>
                 </Route>
 
-                <Route path='/admin'>
+                <Route path='/admin/information'>
                 <Info/>
+                </Route>
+                <Route path='/admin'>
+                    <Info/>
                 </Route>
 
             </Switch>

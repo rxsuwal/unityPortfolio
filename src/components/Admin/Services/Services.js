@@ -6,8 +6,9 @@ import Input from '../../UI/Form/Input/Input'
 
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 import { connect } from 'react-redux'
-import Navbar from '../Navbar/Navbar'
+import Layout from '../Layout/Layout'
 import ImgUpload from '../../UI/ImgUpload/ImgUpload'
+import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
 import {storage} from '../../../firebase/index'
 
@@ -64,7 +65,8 @@ import {storage} from '../../../firebase/index'
           url:'',
           progress:'',
           valid:false
-        }
+        },
+        sideDrawer:false,
     }
 
     componentDidMount(){
@@ -163,20 +165,6 @@ import {storage} from '../../../firebase/index'
       
       submitData=(e)=>{
         e.preventDefault();
-    
-        // const servicesData ={}
-        // for (let formElementIdentifier in this.state.services){
-        //     servicesData[formElementIdentifier] = this.state.services[formElementIdentifier].value
-        // }
-    
-    
-        // const services = {
-        //   services : servicesData
-        // }
-    
-        // axios.post('/services.json',services)
-        //       .then(response=>console.log(response.data))
-        //       .catch(error => console.log(error))
       }
 
       servicesValue =()=>{
@@ -187,6 +175,17 @@ import {storage} from '../../../firebase/index'
 
         }
       }
+
+      sideDrawerClosedHandler = () =>{
+        this.setState({showSideDrawer:false})
+    
+      }
+    
+      sideDrawerOpenHandler = () =>{
+        this.setState({showSideDrawer:true})
+      }
+
+      
 
     render(){
 
@@ -226,24 +225,38 @@ import {storage} from '../../../firebase/index'
     
     
         return (
-          <div className={styles.services}>
-            <Navbar/>
+          <Layout>
             <h2>services</h2>
     
-            {form}  
+            <div className={styles.serviceList}>
 
-           <div className={styles.serviceList}>
-           {this.props.services.map(services=>(
-              <ul>
-                <li>{services.title}</li>
-                <li>{services.description}</li>
-                <li><img src={services.icon} alt=''/></li>
-              </ul>
-            ))}
-            {console.log(this.props.services)}
-           </div>
-      
-          </div>
+                {this.props.services.map(services=>(
+                    <article>
+                      <div className={styles.content}>
+                        <div>
+                        <h4>{services.title}</h4>
+                        <p>{services.description}</p>
+                        </div>
+                       <div> <picture><img src={services.icon} alt=''/></picture></div>
+                      </div>
+
+                      <button onClick={()=>this.props.deleteServices(services.id)}>DELETE</button>
+                      <button>EDIT</button>
+
+                    </article>
+                  ))}
+                
+            </div>
+
+            <button onClick={this.sideDrawerOpenHandler}>ADD MORE</button>
+
+                  <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
+                  {form}  
+                  </Sidedrawer>
+            
+            
+
+          </Layout>
         )
       }
 }
@@ -257,7 +270,8 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
   return{
     saveServices : (payload)=>dispatch(actionCreator.saveServices(payload)),
-    initServices : ()=>dispatch(actionCreator.initServices())
+    initServices : ()=>dispatch(actionCreator.initServices()),
+    deleteServices:(id)=>dispatch(actionCreator.deleteServices(id))
   }
 }
 

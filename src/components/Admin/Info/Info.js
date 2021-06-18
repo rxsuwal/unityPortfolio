@@ -11,8 +11,9 @@ import Spinner from '../../UI/Spinner/Spinner'
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 import ImgUpload from '../../UI/ImgUpload/ImgUpload'
 import { storage } from '../../../firebase'
-import Navbar from '../Navbar/Navbar'
-
+import Layout from '../Layout/Layout'
+import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
+import Button from '../Button/Button'
 
 
 class Info extends Component {
@@ -95,20 +96,6 @@ state ={
       valid:false,
       touched:false
     },
-    // logo :{
-    //   elementType:'input',
-    //   elementConfig:{
-    //     type:'file',
-    //     placeholder:'logo'
-  
-    //   },
-    //   value:'',
-    //   validation:{
-    //     required:true,
-    //   },
-    //   valid:false,
-    //   touched:false
-    // }
     
   },
   formIsValid:false,
@@ -116,7 +103,8 @@ state ={
     url:'',
     progress:'',
     valid:false
-     }
+     },
+  showSideDrawer:false
   
  
 };
@@ -125,8 +113,6 @@ state ={
 
 componentDidMount(){
   this.props.initInfo()
-  console.log(this.props.info.name)
- 
 }
 
 
@@ -190,7 +176,6 @@ componentDidMount(){
   imgOnchange = (e)=>{
 
     const img = e.target.files[0]
-    // console.log(img)
     const uploadImg = storage.ref(`images/logo/${img.name}`).put(img);
     uploadImg.on(
       'state_changed',
@@ -243,10 +228,17 @@ componentDidMount(){
     }
   }
 
+
+  sideDrawerClosedHandler = () =>{
+    this.setState({showSideDrawer:false})
+
+  }
+
+  sideDrawerOpenHandler = () =>{
+    this.setState({showSideDrawer:true})
+  }
+
   
-
- 
-
 
 
   render(){
@@ -288,16 +280,19 @@ componentDidMount(){
     )
 
     let details = null
+    // eslint-disable-next-line no-lone-blocks
     {this.props.info.name ? 
           details =(
-          <ul>
-          <li>{this.props.info.name}</li>
-          <li>{this.props.info.email}</li>
-          <li>{this.props.info.address}</li>
-          <li>{this.props.info.contact}</li>
-          <li>{this.props.info.website}</li>
-          <li><img src={this.props.info.logo} alt=''/> </li>
-        </ul>
+          <div className={styles.details}>
+              <div>
+                  <div className={styles.item}><strong>NAME :</strong> {this.props.info.name}</div>
+                  <div><strong>EMAIL :</strong> {this.props.info.email}</div>
+                  <div><strong>ADDRESS :</strong> {this.props.info.address}</div>
+                  <div><strong>CONTACT :</strong> {this.props.info.contact}</div>
+                  <div><strong>WEBSITE :</strong> {this.props.info.website}</div>
+              </div>
+              <picture><img src={this.props.info.logo} alt=''/> </picture>
+          </div>
         ) : 
         details=(<Spinner/>)
       }
@@ -306,22 +301,19 @@ componentDidMount(){
 
 
     return (
-      <div className={styles.admin}>
-
-        <Navbar/>
-  
-        <h2>Information</h2>
-
-        {form} 
-
+      <Layout>
         
-
-
+        <h1>INFORMATION</h1>
         {details} 
-       
 
-  
-      </div>
+          <Button clicked={this.sideDrawerOpenHandler}>edit</Button>
+
+        <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
+            {form} 
+        </Sidedrawer>
+
+         
+      </Layout>
     )
   }
 

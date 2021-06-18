@@ -4,11 +4,11 @@ import styles from './Portfolio.module.scss'
 
 import Input from '../../UI/Form/Input/Input'
 
-import axios from '../../../axios-data-push'
 import { connect } from 'react-redux'
 import * as actionCreator from '../../../store/actions/actionCreators/index'
-import Navbar from '../Navbar/Navbar'
+import Layout from '../Layout/Layout'
 import ImgUpload from '../../UI/ImgUpload/ImgUpload'
+import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
 import {storage} from  '../../../firebase/index'
 
@@ -50,7 +50,8 @@ import {storage} from  '../../../firebase/index'
           url:'',
           valid:false,
           progress:''
-        }
+        },
+        siderDrawer:false
     }
 
 
@@ -160,6 +161,17 @@ import {storage} from  '../../../firebase/index'
         this.props.initPortfolio();
       }
 
+      // MODAL HANDLER
+      sideDrawerClosedHandler = () =>{
+        this.setState({showSideDrawer:false})
+    
+      }
+    
+      sideDrawerOpenHandler = () =>{
+        this.setState({showSideDrawer:true})
+      }
+
+
     render(){
 
         const formElementArray = [];
@@ -198,27 +210,29 @@ import {storage} from  '../../../firebase/index'
     
     
         return (
-          <div className={styles.portfolio}>
-            <Navbar/>
-      
+          <Layout>
             <h2>portfolio</h2>
-            {form}  
-        
-
-         <div className={styles.portfolioList}>   
+            
+            <div className={styles.portfolioList}>   
            {this.props.portfolio.map(portfolio=>(
               <article>
                 <h4>{portfolio.title}</h4>
                 <p>{portfolio.description}</p>
                 <picture><img src={portfolio.icon} alt=''/></picture>
-                <button onClick={(id)=>this.props.deletePortfolio(id)}>Delete</button>
+                <button onClick={()=>this.props.deletePortfolio(portfolio.id)}>Delete</button>
                 <button>Edit</button>
               </article>
             ))}
             </div>
 
-      
-          </div>
+              <button onClick={this.sideDrawerOpenHandler}>ADD MORE</button>
+            <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
+              {form}  
+              </Sidedrawer>
+        
+
+        
+          </Layout>
         )
       }
 }
@@ -233,7 +247,7 @@ const mapDispatchToProps =dispatch => {
   return{
     savePortfolio : (payload)=>dispatch(actionCreator.savePortfolio(payload)),
     initPortfolio : ()=>dispatch(actionCreator.initPortfolio()),
-    deletePortfolio : (e)=>dispatch(actionCreator.deletePortfolio(e))
+    deletePortfolio : (id)=>dispatch(actionCreator.deletePortfolio(id))
   }
 }
 
