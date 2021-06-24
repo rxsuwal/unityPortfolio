@@ -7,10 +7,17 @@ export const saveServices = (payload) =>{
         axios.post('/Services.json',payload)
                 .then(rspnse=>{
                   
-                    dispatch(setServices(payload))
+                    dispatch(addServices(payload))
 
                 })
                 .catch(err=> console.log(err))
+    }
+}
+
+export const addServices = (payload) =>{
+    return{
+        type: actionType.ADD_SERVICES,
+        payload:payload
     }
 }
 
@@ -56,5 +63,11 @@ export const deleteServices =(id)=>{
                 .catch(err=>{
                     console.log(err)
                 })
+    }
+}
+
+export const setServicesStatus = ()=>{
+    return{
+        
     }
 }

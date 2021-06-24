@@ -1,14 +1,20 @@
 export {saveInfo, 
-        initInfo} from './saveInfo'
+        initInfo,
+        setInfoStatus} from './saveInfo'
 
 export{saveServices,
         initServices,
-        deleteServices} from './saveServices'
+        deleteServices,
+        setServicesStatus} from './saveServices'
 
 export{savePortfolio,
         initPortfolio,
-        deletePortfolio } from './savePortfolio'
+        deletePortfolio,
+        setPortfolioStatus } from './savePortfolio'
 
 export {sendMsg, 
          initMsg,
          deleteMsg} from './sendMsg'
+
+export {saveSocialLink,
+        initSocialLink} from './saveSocialLink'

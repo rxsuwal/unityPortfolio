@@ -13,7 +13,13 @@ import ImgUpload from '../../UI/ImgUpload/ImgUpload'
 import { storage } from '../../../firebase'
 import Layout from '../Layout/Layout'
 import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
-import Button from '../Button/Button'
+
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import EditButton from '../UI/EditButton/EditButton'
+
 
 
 class Info extends Component {
@@ -114,6 +120,7 @@ state ={
 componentDidMount(){
   this.props.initInfo()
 }
+
 
 
 
@@ -236,15 +243,19 @@ componentDidMount(){
 
   sideDrawerOpenHandler = () =>{
     this.setState({showSideDrawer:true})
+    console.log('object')
   }
+  
+     
 
   
 
 
   render(){
 
+    // FORM DISPLAY
     const formElementArray = [];
-    for (let key in this.state.info){
+    for (let key in this.state.info){  
       formElementArray.push({
         id:key,
       config: this.state.info[key]
@@ -269,6 +280,7 @@ componentDidMount(){
         ))}
 
       <ImgUpload change={(e)=>this.imgOnchange(e)} progress={this.state.logo.progress}/>
+
       {console.log(this.state.logo)}
 
       <button className={styles.button} 
@@ -279,6 +291,7 @@ componentDidMount(){
       </form>
     )
 
+    // INFORMATION DISPLAY
     let details = null
     // eslint-disable-next-line no-lone-blocks
     {this.props.info.name ? 
@@ -297,8 +310,12 @@ componentDidMount(){
         details=(<Spinner/>)
       }
 
-   
-
+      // TOAST MSG
+      if(this.props.status){
+        toast.success('INFORMATION SAVED')
+        window.location.reload(true); 
+      }
+      
 
     return (
       <Layout>
@@ -306,13 +323,16 @@ componentDidMount(){
         <h1>INFORMATION</h1>
         {details} 
 
-          <Button clicked={this.sideDrawerOpenHandler}>edit</Button>
+          <EditButton clicked={this.sideDrawerOpenHandler}>edit</EditButton>
 
         <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
             {form} 
         </Sidedrawer>
 
-         
+        <ToastContainer/>  
+
+ 
+           
       </Layout>
     )
   }
@@ -326,6 +346,7 @@ const mapStateToProps = state => {
   return{
 
     info : state.info.info,
+    status:state.info.status
 
   }
 }

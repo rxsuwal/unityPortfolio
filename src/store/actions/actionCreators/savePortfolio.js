@@ -5,18 +5,22 @@ export const savePortfolio =(payload)=>{
     return dispatch=>{
         axios.post('/Portfolio.json', payload)
                 .then(rspnse=>{
-                    console.log(rspnse.data)
-                    dispatch(setPortfolio(payload))
+                    dispatch(addPortfolio())
                 })
                 .catch(err=>console.log(err))
     }
    
 }
 
+export const addPortfolio = ()=>{
+    return{
+        type:actionType.ADD_PORTFOLIO
+    }
+}
 
 export const setPortfolio = (payload)=>{
     return{
-        type:actionType.SAVE_PORTFOLIO,
+        type:actionType.SET_PORTFOLIO,
         payload:payload
     }
 }
@@ -57,4 +61,10 @@ export const deletePortfolio = (id)=>{
             })
             .catch(err=>console.log(err))
   }
+}
+
+export const setPortfolioStatus =()=>{
+    return{
+        
+    }
 }

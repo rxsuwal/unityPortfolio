@@ -12,6 +12,14 @@ import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
 import {storage} from '../../../firebase/index'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+import DeleteButton from '../UI/DeleteButton/DeleteButton'
+import  EditButton from '../UI/EditButton/EditButton'
+
+import AddBtn from '../UI/AddBtn/AddBtn'
+
 
  class Services extends Component {
 
@@ -45,20 +53,7 @@ import {storage} from '../../../firebase/index'
                     valid:false,
                     touched:false
                     },
-            //  icon:{
-            //     elementType:'input',
-            //     elementConfig:{
-            //         type:'file',
-            //         placeholder:'services icons'
-
-            //     },
-            //     value:'',
-            //     validation:{
-            //         required:true,
-            //     },
-            //     valid:false,
-            //     touched:false
-            //     },
+         
         },
         formIsValid:false,
         icon:{
@@ -222,6 +217,24 @@ import {storage} from '../../../firebase/index'
                       >Submit</button> 
           </form>
         )
+
+      
+        // TOAST MESSAGE
+        if(this.props.deleteStatus){
+          toast.success('Deleted !');
+          setTimeout(window.location.reload(),5000); 
+        }
+
+        if(this.props.addStatus){
+          toast.success('Added !')
+          setTimeout(window.location.reload(),3000); 
+        }
+        if(this.props.editStatus){
+          toast.success('Updated !')
+          setTimeout(window.location.reload(),3000); 
+        }
+
+
     
     
         return (
@@ -240,22 +253,25 @@ import {storage} from '../../../firebase/index'
                        <div> <picture><img src={services.icon} alt=''/></picture></div>
                       </div>
 
-                      <button onClick={()=>this.props.deleteServices(services.id)}>DELETE</button>
-                      <button>EDIT</button>
+                      <div style={{display:'flex'}}>
+                      <DeleteButton clicked={()=>this.props.deleteServices(services.id)}>DELETE</DeleteButton>
+                      <EditButton>EDIT</EditButton>
+                      </div>
 
                     </article>
                   ))}
                 
             </div>
 
-            <button onClick={this.sideDrawerOpenHandler}>ADD MORE</button>
+            <AddBtn clicked={this.sideDrawerOpenHandler}>ADD services</AddBtn>
 
                   <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
                   {form}  
                   </Sidedrawer>
             
             
-
+          <ToastContainer position="bottom-right"
+                          />
           </Layout>
         )
       }
@@ -263,7 +279,10 @@ import {storage} from '../../../firebase/index'
 
 const mapStateToProps = state =>{
   return{
-    services : state.services.services
+    services : state.services.services,
+    deleteStatus : state.services.deleteStatus,
+    addStatus:state.services.addStatus,
+    editStatus:state.services.editStatus
   }
 }
 

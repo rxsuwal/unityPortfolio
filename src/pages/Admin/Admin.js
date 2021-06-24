@@ -9,6 +9,7 @@ import {
     Switch,
     Route
   } from "react-router-dom";
+import SocialLink from '../../components/Admin/SocialLink/SocialLink'
 
 
 
@@ -29,6 +30,10 @@ const Admin = () => {
                 <Route path='/admin/message'>
                 <Message/>
                 </Route>
+
+                <Route path='/admin/social'>
+                <SocialLink/>
+                </Route>    
 
                 <Route path='/admin/information'>
                 <Info/>

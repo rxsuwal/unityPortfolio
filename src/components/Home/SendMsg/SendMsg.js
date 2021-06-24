@@ -4,6 +4,10 @@ import Input from '../../UI/Form/Input/Input'
 
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 
+import { ToastContainer, toast } from 'react-toastify';
+
+  import 'react-toastify/dist/ReactToastify.css';
+
 class SendMsg extends Component {
 
     state ={
@@ -163,14 +167,17 @@ class SendMsg extends Component {
           )
                }
 
+      
       msgPayload = () => {
+
         return{
             name:this.state.message.name.value,
-        email:this.state.message.email.value,
-        description:this.state.message.description.value,
+            email:this.state.message.email.value,
+           description:this.state.message.description.value,
         }
       }
     
+     
       
     render(){
 
@@ -202,21 +209,38 @@ class SendMsg extends Component {
     
     
               <button 
-                      
+                     disabled={!this.state.formIsValid} 
                       onClick={()=>this.props.sendMessage(this.msgPayload())}>Submit</button>
           </form>
         )
 
-        
-    
-    
+        //TOAST MSG
+        if(this.props.sendStatus){
+          toast.success('Message Sent',{position: "bottom-right",
+                                              autoClose: 5000,
+                                              hideProgressBar: false,
+                                              closeOnClick: true,
+                                              pauseOnHover: true,
+                                              draggable: true,
+                                              progress: undefined,
+                                              })
+        }
+            
         return (
           <div >
-    
             {form}  
 
-           
-      
+            <ToastContainer position="bottom-right"
+                          autoClose={5000}
+                          hideProgressBar={false}
+                          newestOnTop={false}
+                          closeOnClick
+                          rtl={false}
+                          pauseOnFocusLoss
+                          draggable
+                          pauseOnHover
+                          />
+
           </div>
         )
       }
@@ -224,7 +248,8 @@ class SendMsg extends Component {
 
 const mapStateToProps = state => {
     return{
-      message : state.message.message
+      message : state.message.message,
+      sendStatus:state.message.sendStatus
     }
   }
   

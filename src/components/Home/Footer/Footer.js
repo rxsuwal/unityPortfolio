@@ -4,11 +4,11 @@ import clientsLogo from '../../../assets/img/clients-logo.jpg'
 
 import styles from './Footer.module.scss'
 
-import Btn from '../../UI/BtnOrange/BtnOrange'
-import axios from '../../../axios-data-push'
+
 import { Component } from 'react'
 import SendMsg from '../SendMsg/SendMsg'
 import { connect } from 'react-redux'
+import BusinessIcon from '@material-ui/icons/Business';
 
 import * as actionCreator from '../../../store/actions/actionCreators/index'
 
@@ -26,7 +26,7 @@ class Footer extends Component {
 
    render(){
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} id='contact'>
 
             <figure>
                 <img src={clientsLogo} alt=''/>
@@ -40,11 +40,13 @@ class Footer extends Component {
                     
                     <div class={styles.contact}>
                         <div class={styles.title}>Contact</div>
-                        <ul>
+                        <ul>    
+                                <li><a href="#!"><BusinessIcon/> <span>{this.props.info.name}</span></a></li>
+
                                 <li><a href="#!"><i class="fi-xnsuxl-map-marker-solid"></i> <span>{this.props.info.address}</span></a></li>
-                                <li><a href="#!"><i class="fi-xnluxl-envelope"></i> <span>{this.props.info.email}</span></a></li>
-                                <li><a href="#!"><i class="fi-xnsrxl-phone-solid"></i> <span>+977 - {this.props.info.contact}</span></a></li>
-                                <li><a href="#!"><i class="fi-cnluxl-globe-solid"></i> <span>{this.props.info.website}</span></a></li>
+                                <li><a href={'mailto:' + this.props.info.email}><i class="fi-xnluxl-envelope"></i> <span>{this.props.info.email}</span></a></li>
+                                <li><a href={'tel:' + this.props.info.contact}><i class="fi-xnsrxl-phone-solid"></i> <span>+977 - {this.props.info.contact}</span></a></li>
+                                <li><a href={'https://' + this.props.info.website}><i class="fi-cnluxl-globe-solid"></i> <span>{this.props.info.website}</span></a></li>
                         </ul>   
                         
                     </div>

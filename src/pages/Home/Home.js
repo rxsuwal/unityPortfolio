@@ -12,10 +12,10 @@ const Home = () => {
         <Fragment>
             <Hero/>
             <About/>
-            <Team/>
+        {/* <Team/> */}
             <Works/>
             <Services/>
-            <Testimonials/>
+            {/* <Testimonials/> */}
             <Footer/>
         </Fragment>
     )

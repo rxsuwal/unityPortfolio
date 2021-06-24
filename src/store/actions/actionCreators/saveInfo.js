@@ -4,13 +4,14 @@ import * as actionType from '../actionTypes'
 export const saveInfo = (payload) =>{
     return dispatch=>{
         axios.put('Info.json', payload)
-                .then( payload=>{
-                    dispatch(setInfo(payload.data)) 
-                    console.log(payload)
-                }
-                   
-                )
-                .catch(err=>console.log(err))
+        .then( payload=>{
+            dispatch(setInfo(payload.data));
+            dispatch(setInfoStatus());
+            
+        }
+           
+        )
+        .catch(err=>console.log(err))
     }
    
 }
@@ -31,5 +32,11 @@ export const initInfo =()=>{
             .catch(error =>{
                 console.log('Errorr Fetching data', error)
                 })
+    }
+}
+
+export const setInfoStatus =()=>{
+    return{
+        type:actionType.SET_INFO_STATUS
     }
 }

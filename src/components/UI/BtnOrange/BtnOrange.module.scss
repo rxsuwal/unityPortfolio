@@ -1,6 +1,6 @@
 @import '../../../assets//styles/variables.scss';
 
-button.btnOrange{
+a.btnOrange{
     border:$orange ;
     background-color: $bgOrange;
     color: $txtWhite;
@@ -18,33 +18,33 @@ button.btnOrange{
     }
 }
 @media screen and (max-width:1600px) {
-   button.btnOrange{
+   a.btnOrange{
        font-size: 18px;
    }
    }
 @media screen and  (max-width:1400px){
-    button.btnOrange{
+    a.btnOrange{
         font-size: 16px;
     }
 }
 
 
 @media screen and  (max-width:1024px){
-    button.btnOrange{
+    a.btnOrange{
        font-size: 18px;
         margin-top: 16px;
     }
 }
 
 @media screen and  (max-width:600px){
-    button.btnOrange{
+    a.btnOrange{
        font-size: 14px;
        
     }
 }
 
 @media screen and  (max-width:350px){
-    button.btnOrange{
+    a.btnOrange{
        font-size: 12px;
        
     }

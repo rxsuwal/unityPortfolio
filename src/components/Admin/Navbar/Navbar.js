@@ -11,6 +11,7 @@ function Navbar() {
                 <li> <NavLink activeClassName={styles.activeLink} to='/admin/services'>services</NavLink></li>
                 <li><NavLink activeClassName={styles.activeLink} to='/admin/portfolio'>Portfolio</NavLink></li>
                 <li><NavLink activeClassName={styles.activeLink} to='/admin/message'>Message</NavLink></li>
+                <li><NavLink activeClassName={styles.activeLink} to='/admin/social'>social</NavLink></li>
                 
                
             </ul>

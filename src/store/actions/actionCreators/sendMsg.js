@@ -2,18 +2,19 @@ import * as actionType from '../actionTypes'
 
 import axios from '../../../axios-data-push'
 
-export const sendMsg = (payload) =>{
 
-    return dispatch =>{
+export const sendMsg = (payload) =>{
+    return dispatch=>{
         axios.post('/Message.json', payload)
-                .then(response=>{
-                    console.log('Message sent', response)
-                })
-                .catch(err=>{
-                    console.log('Error', err)
-                })
+                .then(dispatch(addMsg()))
+                .catch(err=>console.log(err))
     }
-  
+}
+
+export const addMsg =()=>{
+    return{
+        type:actionType.ADD_MSG
+    }
 }
 
 export const setMsg = (payload)=>{

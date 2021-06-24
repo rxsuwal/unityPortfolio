@@ -1,17 +1,20 @@
 import * as actionType from '../actions/actionTypes'
 
 const initialState = {
-    portfolio : []
+    portfolio : [],
+    addStatus:false,
+    deleteStatus:false,
+    editStatus:false
 }
 
 const reducer = (state = initialState, action)=>{
 
     switch(action.type){
-        case actionType.SAVE_PORTFOLIO:
+        case actionType.ADD_PORTFOLIO:
            
           return{
               ...state,
-              portfolio:state.portfolio.concat(action.payload)
+              addStatus:true
           }
           
         case actionType.SET_PORTFOLIO:
@@ -22,11 +25,11 @@ const reducer = (state = initialState, action)=>{
             }
 
         case actionType.DELETE_PORTFOLIO:
-            console.log(action.payload)
-           
+
            return{
                ...state,
-               portfolio:state.portfolio.filter(state => state.id !== action.payload)
+               portfolio:state.portfolio.filter(state => state.id !== action.payload),
+               deleteStatus:true
            }
             
 

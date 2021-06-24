@@ -11,6 +11,11 @@ import ImgUpload from '../../UI/ImgUpload/ImgUpload'
 import Sidedrawer from '../../UI/Sidedrawer/Sidedrawer'
 
 import {storage} from  '../../../firebase/index'
+import { ToastContainer, toast } from 'react-toastify'
+
+import AddBtn from '../UI/AddBtn/AddBtn'
+import DeleteButton from '../UI/DeleteButton/DeleteButton'
+import EditButton from '../UI/EditButton/EditButton'
 
  class Portfolio extends Component {
 
@@ -199,7 +204,7 @@ import {storage} from  '../../../firebase/index'
                   />
             ))}
 
-  <ImgUpload change={(e)=>this.imgUploadOnChange(e)} progress={this.state.icon.progress}/>
+           <ImgUpload change={(e)=>this.imgUploadOnChange(e)} progress={this.state.icon.progress}/>
 
     
               <button className={styles.button} 
@@ -207,31 +212,71 @@ import {storage} from  '../../../firebase/index'
                       onClick={()=>this.props.savePortfolio(this.portfolioValue())}>Submit</button>
           </form>
         )
+
+        // TOAST MSG
+        if(this.props.deleteStatus){
+          toast.success('Deleted !',{
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            })
+            setTimeout( window.location.reload(),10000)
+        }
+
+        if(this.props.editStatus){
+          toast.success('Updated !')
+          setTimeout( window.location.reload(),3000)
+
+        }
+        if(this.props.addStatus){
+          toast.success('Added !')
+          setTimeout( window.location.reload(),10000)
+
+        }
+        
+
     
     
         return (
           <Layout>
-            <h2>portfolio</h2>
+            <h1>portfolio</h1>
             
             <div className={styles.portfolioList}>   
-           {this.props.portfolio.map(portfolio=>(
-              <article>
-                <h4>{portfolio.title}</h4>
-                <p>{portfolio.description}</p>
-                <picture><img src={portfolio.icon} alt=''/></picture>
-                <button onClick={()=>this.props.deletePortfolio(portfolio.id)}>Delete</button>
-                <button>Edit</button>
-              </article>
-            ))}
+              {this.props.portfolio.map(portfolio=>(
+                  <article>
+                    <h4>{portfolio.title}</h4>
+                    <p>{portfolio.description}</p>
+                    <picture><img src={portfolio.icon} alt=''/></picture>
+                   <div style={{display:'flex'}}> 
+                     <DeleteButton clicked={()=>this.props.deletePortfolio(portfolio.id)}>delete</DeleteButton>
+                    <EditButton>Edit</EditButton>
+                    </div>
+                  </article>
+                ))}
             </div>
 
-              <button onClick={this.sideDrawerOpenHandler}>ADD MORE</button>
-            <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
+              <AddBtn clicked={this.sideDrawerOpenHandler}>Add portfolio</AddBtn>
+
+             <Sidedrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler}>
               {form}  
               </Sidedrawer>
         
 
-        
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                />
           </Layout>
         )
       }
@@ -239,7 +284,10 @@ import {storage} from  '../../../firebase/index'
 
 const mapStateToProps = state => {
   return{
-    portfolio : state.portfolio.portfolio
+    portfolio : state.portfolio.portfolio,
+    deleteStatus:state.portfolio.deleteStatus,
+    addStatus:state.portfolio.addStatus,
+    editStatus:state.portfolio.editStatus
   }
 }
 

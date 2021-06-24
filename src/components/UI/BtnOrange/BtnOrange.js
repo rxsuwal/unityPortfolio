@@ -3,9 +3,9 @@ import styles from './BtnOrange.module.scss'
 
 const BtnOrange = (props) => {
     return (
-        <button className={styles.btnOrange}>
+        <a href={props.href} className={styles.btnOrange}>
             {props.children}
-        </button>
+        </a>
     )
 }
 
