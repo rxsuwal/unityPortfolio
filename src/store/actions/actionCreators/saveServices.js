@@ -1,10 +1,10 @@
 import * as actionType from '../actionTypes'
 import axios from '../../../axios-data-push'
 
-export const saveServices = (payload) =>{
+export const saveServices = (payload,token) =>{
 
     return dispatch =>{
-        axios.post('/Services.json',payload)
+        axios.post('/Services.json?auth=' + token,payload)
                 .then(rspnse=>{
                   
                     dispatch(addServices(payload))
@@ -54,9 +54,9 @@ export const deleteServicesLocal =(id)=>{
     }
 }
 
-export const deleteServices =(id)=>{
+export const deleteServices =(id,token)=>{
     return dispatch=>{
-        axios.delete('Services/' + id +".json")
+        axios.delete('Services/' + id +".json/?auth=" + token)
                 .then(rspnse =>{
                     dispatch(deleteServicesLocal(id))
                 })

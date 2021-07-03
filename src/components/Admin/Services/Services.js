@@ -213,7 +213,7 @@ import AddBtn from '../UI/AddBtn/AddBtn'
 
               <button className={styles.button} 
                       disabled={!this.state.formIsValid}
-                      onClick={()=>this.props.saveServices(this.servicesValue())}
+                      onClick={()=>this.props.saveServices(this.servicesValue(),this.props.token)}
                       >Submit</button> 
           </form>
         )
@@ -254,7 +254,7 @@ import AddBtn from '../UI/AddBtn/AddBtn'
                       </div>
 
                       <div style={{display:'flex'}}>
-                      <DeleteButton clicked={()=>this.props.deleteServices(services.id)}>DELETE</DeleteButton>
+                      <DeleteButton clicked={()=>this.props.deleteServices(services.id,this.props.token)}>DELETE</DeleteButton>
                       <EditButton>EDIT</EditButton>
                       </div>
 
@@ -282,15 +282,16 @@ const mapStateToProps = state =>{
     services : state.services.services,
     deleteStatus : state.services.deleteStatus,
     addStatus:state.services.addStatus,
-    editStatus:state.services.editStatus
+    editStatus:state.services.editStatus,
+    token:state.auth.token
   }
 }
 
 const mapDispatchToProps = dispatch =>{
   return{
-    saveServices : (payload)=>dispatch(actionCreator.saveServices(payload)),
+    saveServices : (payload,token)=>dispatch(actionCreator.saveServices(payload,token)),
     initServices : ()=>dispatch(actionCreator.initServices()),
-    deleteServices:(id)=>dispatch(actionCreator.deleteServices(id))
+    deleteServices:(id,token)=>dispatch(actionCreator.deleteServices(id,token))
   }
 }
 

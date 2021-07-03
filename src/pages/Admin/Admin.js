@@ -10,6 +10,8 @@ import {
     Route
   } from "react-router-dom";
 import SocialLink from '../../components/Admin/SocialLink/SocialLink'
+import Auth from '../../components/Admin/Auth/Auth'
+import AuthOut from '../../components/Admin/AuthOut/AuthOut'
 
 
 
@@ -17,7 +19,6 @@ const Admin = () => {
     return (
         <Router>
             <Switch>
-                
 
                <Route path='/admin/services'>
                <Services/>
@@ -33,14 +34,22 @@ const Admin = () => {
 
                 <Route path='/admin/social'>
                 <SocialLink/>
-                </Route>    
+                </Route> 
+                 
 
                 <Route path='/admin/information'>
                 <Info/>
                 </Route>
-                <Route path='/admin'>
-                    <Info/>
+                
+                <Route path='/admin/authout'>
+                    <AuthOut/>
                 </Route>
+                
+                <Route path='/admin'>
+                    <Auth/>
+                </Route>
+
+        
 
             </Switch>
         </Router>

@@ -22,3 +22,9 @@ export const SET_MSG_STATUS = 'SET_MSG_STATUS'
 export const SET_SOCIAL_LINK ='SET_SOCIAL_LINK'
 export const ADD_SOCIAL_LINK ='ADD_SOCIAL_LINK'
 export const SET_SOCIAL_LINK_STATUS='SET_SOCIAL_LINK_STATUS'
+
+export const AUTH_START ='AUTH_START'
+export const AUTH_SUCCESS ='AUTH_SUCCESS'
+export const AUTH_FAIL ='AUTH_FAIL'
+export const AUTH_OUT = 'AUTH_OUT'
+

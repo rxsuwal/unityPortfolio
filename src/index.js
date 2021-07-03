@@ -9,6 +9,7 @@ import portfolioReducer from './store/reducer/portfolio'
 import servicesReducer from './store/reducer/services'
 import messageReducer from './store/reducer/message'
 import socialLinkReducer from './store/reducer/socialLink'
+import authReducer from './store/reducer/auth'
 import { applyMiddleware, combineReducers, createStore,compose } from 'redux';
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   services : servicesReducer,
   portfolio : portfolioReducer,
   message : messageReducer,
-  socialLink : socialLinkReducer
+  socialLink : socialLinkReducer,
+  auth:authReducer
 
 })
 

@@ -19,12 +19,12 @@ class Works extends Component {
                     <p>Id consectetur cillum proident aliquip occaecat ullamco cillum in.Aliquip laboris mollit est aute.</p>
                 </div>
     
-                <ul class={styles.filter}>
+                {/* <ul class={styles.filter}>
                     <li><button data-name="*" className="active" >All</button></li>
                     <li> <button data-name=".webdesign" class=" ">Web Design </button></li>
                     <li> <button data-name=".mobile" class=" ">Mobile</button></li>
                     <li> <button data-name=".photography" class="">Photography</button></li>
-                </ul>
+                </ul> */}
                 
                 <div className={styles.grid}>
 

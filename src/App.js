@@ -3,15 +3,24 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  withRouter
 } from "react-router-dom";
 
 import Admin from './pages/Admin/Admin'
 import Home from './pages/Home/Home'
 
+import {connect} from 'react-redux'
+import * as actionCreator from './store/actions/actionCreators/index'
+import { useEffect } from 'react';
 
 
-function App() {
+function App(props) {
+
+  useEffect(() => {
+    props.onAuthIn()
+  }, [])
+
   return (
     <div className="App">
     
@@ -27,9 +36,17 @@ function App() {
          
         </Switch>
     </Router>
-      
+       
     </div>
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch =>{
+
+  return{
+    onAuthIn:()=>dispatch(actionCreator.authCheckState())
+  }
+
+}
+
+export default connect(null,mapDispatchToProps)(App);

@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import UpdateButton from '../UI/UpdateButton/UpdateButton'
 import EditButton from '../UI/EditButton/EditButton'
+import Spinner from '../../UI/Spinner/Spinner'
 
 
  const SocialLink =(props)=> {
@@ -108,7 +109,7 @@ import EditButton from '../UI/EditButton/EditButton'
         props.initSocialLink(); 
     },[])
 
-
+   
 
     return (
         <Layout>

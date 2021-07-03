@@ -18,3 +18,8 @@ export {sendMsg,
 
 export {saveSocialLink,
         initSocialLink} from './saveSocialLink'
+
+export {auth,
+        authIn,
+        authOut,
+        authCheckState} from './auth'

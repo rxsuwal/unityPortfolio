@@ -1,9 +1,9 @@
 import axios from '../../../axios-data-push'
 import * as actionType from '../actionTypes'
 
-export const saveInfo = (payload) =>{
+export const saveInfo = (payload,token) =>{
     return dispatch=>{
-        axios.put('Info.json', payload)
+        axios.put('Info.json?auth='+ token, payload)
         .then( payload=>{
             dispatch(setInfo(payload.data));
             dispatch(setInfoStatus());

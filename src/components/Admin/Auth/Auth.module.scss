@@ -1,0 +1,19 @@
+@import '../../../assets/styles//variables.scss';
+.authForm{
+    margin-top: 10%;
+    label{
+        display: block;
+    }
+
+    input{
+        margin-top: 10px;
+        font-size: 14px;
+        padding: 8px 10px;
+        border: 1px solid black;
+        outline: none;
+
+        &:focus{
+           border: 1px solid $orange;
+        }
+    }
+}

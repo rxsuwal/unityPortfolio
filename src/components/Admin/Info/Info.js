@@ -285,7 +285,7 @@ componentDidMount(){
 
       <button className={styles.button} 
                 disabled={!this.state.formIsValid} 
-                onClick={()=>this.props.saveInfo(this.infoValue())}>Submit</button> 
+                onClick={()=>this.props.saveInfo(this.infoValue(),this.props.token)}>Submit</button> 
 
          
       </form>
@@ -346,7 +346,8 @@ const mapStateToProps = state => {
   return{
 
     info : state.info.info,
-    status:state.info.status
+    status:state.info.status,
+    token:state.auth.token
 
   }
 }
@@ -354,7 +355,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    saveInfo : (payload)=>dispatch(actionCreator.saveInfo(payload)),
+    saveInfo : (payload,token)=>dispatch(actionCreator.saveInfo(payload,token)),
     initInfo : ()=>dispatch(actionCreator.initInfo())
   }
 
